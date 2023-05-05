@@ -1,6 +1,37 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { lazy, useCallback, useEffect, useState } from 'react';
+import { PageClasses } from "./api/customCms/db/utils.interface";
+import { pageClassDynamicBody } from '@/utils/domMethods/pageClassDynamicBody';
+import { getCMSData } from '@/utils/providers/requests/homeCB';
+
+const Layout = lazy(() => import("../components/ui-kit/Layout"));
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+    const router = useRouter();
+    const id = router.pathname;
+    const [handleSubMenu, sethandleSubMenu] = useState<boolean>(false);
+    const [pageClasses, setPageClasses] = useState<PageClasses>({ pageClass: "", mainClass: "" });
+
+    const storageConstructor = useCallback(async () => {
+        const CmsData = await getCMSData();
+        window.localStorage.setItem("CmsData", JSON.stringify(CmsData));
+    }, []);
+
+    useEffect(() => {
+        storageConstructor();
+        const { pageClass, mainClass } = pageClassDynamicBody(id);
+        setPageClasses({ pageClass, mainClass });
+        sethandleSubMenu(false);
+    }, [id, storageConstructor]);
+
+
+    return (
+        <Layout
+            pageClass={pageClasses.pageClass}
+            mainClass={pageClasses.mainClass}
+        >
+            <Component {...pageProps as any} />
+        </Layout>
+    );
 }

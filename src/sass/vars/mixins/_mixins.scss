@@ -1,0 +1,61 @@
+@mixin container-wrap() {
+    max-width: $gl-max-width;
+    width: 100vw;
+    min-width: calculateRem(320px);
+    padding-right: calculateRem($gl-gutter-sides);
+    padding-left: calculateRem($gl-gutter-sides);
+    margin-right: auto;
+    margin-left: auto;
+
+    @media #{$gl-gutter-sides-breakpoint} {
+        padding-left: calculateRem($gutter);
+        padding-right: calculateRem($gutter);
+    }
+}
+
+$parentSize: 16px;
+
+@function calculateRem($size) {
+    // @if unitless($size) { TODO: validate unit calculateRem function
+    // 	@warn 'Assuming value `#{$size}` to be in pixels; attempting to convert it.';
+    // 	$size: $size * 1px;
+    // }
+
+    $remSize: $size / $parentSize;
+    @return #{$remSize}rem;
+}
+
+@mixin font-size($size) {
+    font-size: calculateRem($size);
+}
+
+// input;
+
+@mixin regularInput($h: 47px, $fs: 16px, $br: 24px, $ct: black) {
+    @include font-size($fs);
+    padding: 0 calculateRem(20px);
+    width: 100%;
+    height: calculateRem($h);
+    border-radius: $br;
+    border: calculateRem(1px) solid $c-primary;
+    text-align: center;
+    text-transform: capitalize;
+    box-shadow: $border-regular;
+    color: $ct;
+}
+
+@mixin regularButton($w: 100px, $h: 47px, $fs: 16px, $br: 24px, $ct: $default-text1, $bg: $c-brand-secundary, $fw: $f-weight-bold) {
+    @include font-size($fs);
+    font-family: $f-subtitle;
+    font-weight: $fw;
+    border: calculateRem(1px) solid transparent;
+    background: $bg;
+    padding: 0 calculateRem(20px);
+    width: calculateRem($w);
+    height: calculateRem($h);
+    border-radius: calculateRem($br);
+    text-align: center;
+    text-transform: uppercase;
+    color: $ct;
+    box-shadow: $border-regular;
+}
