@@ -3,7 +3,7 @@ import { LayoutCmsConfig } from './utils/layout.interface';
 import { usePortalProvider } from '@/utils/providers/modalProvider';
 
 interface LayOutDataProps {
-    children:  ReactNode | JSX.Element | JSX.Element[];
+    children: ReactNode | JSX.Element | JSX.Element[];
     pageClass: string;
     mainClass: string;
 }
@@ -14,22 +14,26 @@ const Header = lazy(() => import("./header/Header"));
 const Footer = lazy(() => import("./footer/footer"));
 
 const Layout: React.FC<LayOutDataProps> = ({ children, mainClass, pageClass }) => {
-    const {headerSimple, setHeaderSimple} = usePortalProvider()
+    const { headerSimple, setHeaderSimple } = usePortalProvider();
     const [layoutData, setLayoutData] = useState<LayoutCmsConfig>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [initialStorageValue, setInitialStorageValue] = useState<boolean>(false);
 
     const getLayoutData = useCallback(async () => {
-        const data = await fetch("/api/customCms");
+        debugger
+        const data = await fetch("/api/customCms/layout");
         const res = await data.json();
+        console.log(res)
         if (data !== null) {
-            setLayoutData(res.layout)
+            setLayoutData(res)
+            console.log(layoutData);
         }
     }, [])
 
     useEffect(() => {
+        
         getLayoutData();
-    }, [getLayoutData])
+    }, [])
 
     useEffect(() => {
         if (pageClass == "BLOG-POST--PAGE" || pageClass == "PROJECTS-PAGE" || pageClass == "INBOX--PAGE") {

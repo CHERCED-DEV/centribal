@@ -11,20 +11,6 @@ export interface PageClasses {
   pageClass: string;
   mainClass: string;
 }
-
-export interface FooterConfig {
-  backOption: {
-    img: ImgConfig;
-    text: string;
-    link: Link;
-  };
-  footerSocialMedia: ImgConfig[];
-  copyright: {
-    strongText: string;
-    normalText: string;
-  };
-}
-
 export interface ListItems {
   title: string;
   href: string;

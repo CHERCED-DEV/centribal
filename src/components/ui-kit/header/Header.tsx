@@ -1,9 +1,10 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
 import styles from './utils/header.module.scss';
 import { FloatMenuMobile } from './FloatMenuMobile'
 import { useRouter } from 'next/router';
 import { HeaderConfig } from './utils/header.interface';
+import { usePortalProvider } from '@/utils/providers/modalProvider';
 
 interface HeaderPropsConfig {
     pageClass: string
@@ -12,8 +13,8 @@ interface HeaderPropsConfig {
     header: HeaderConfig;
 }
 
-const Header: React.FC<HeaderPropsConfig> = memo(function Header({ header, pageClass, headerSimple, setHeaderSimple }) {
-    const [handleSubMenu, sethandleSubMenu] = useState<boolean>(false);
+const Header: React.FC<HeaderPropsConfig> = ({ header, pageClass, headerSimple, setHeaderSimple }) => {
+    const { handleSubMenu, sethandleSubMenu } = usePortalProvider();
     const router = useRouter();
     const handleEventBack = () => {
         const pathArray = router.asPath.split("/");
@@ -85,6 +86,6 @@ const Header: React.FC<HeaderPropsConfig> = memo(function Header({ header, pageC
             </header>
         </>
     )
-})
+}
 
-export default Header;
+export default memo(Header);

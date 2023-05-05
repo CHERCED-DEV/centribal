@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { memo } from 'react'
-import Logo from '../../../../public/assets/logos/newman-White.svg'
+import Logo from '../../../../public/assets/logos/centribalLoader.svg'
 
 const CentribaLoader = () => {
     return (
@@ -11,8 +11,8 @@ const CentribaLoader = () => {
                         className='loader__img'
                         src={Logo}
                         alt='newman'
-                        width={293}
-                        height={131}
+                        width={248}
+                        height={262}
                         priority={true}
                     />
                 )
