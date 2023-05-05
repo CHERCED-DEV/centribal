@@ -1,0 +1,149 @@
+@import "../../../../sass/vars-import";
+
+.footer {
+    background: $c-brand-primary;
+    font-family: $f-subtitle;
+    color: $default-text1;
+    background-image: url("../../../../../public/assets/utils/fottermob.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top;
+    padding-top: 138px;
+}
+
+.footerContainer {
+    @include container-wrap();
+}
+
+// newmanBrand
+
+.footerNewManRm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footerNewManImg {
+    margin: calculateRem(37px) 0 calculateRem(12px);
+}
+
+.footerNewManDescription {
+    @include font-size($f-size);
+    font-family: $f-subtitle;
+    text-align: center;
+    line-height: 1.8;
+    
+}
+
+// newsletter
+
+.footerNewsLetter {}
+
+.footerNewsLetterTitle {
+    @include font-size($f-size-md-xxl);
+    font-family: $f-subtitle;
+    font-weight: $f-weight-bold;
+    margin: calculateRem(60px) 0 calculateRem(14px);
+    text-align: center;
+    line-height: 1.1;
+}
+
+.footerNewsLetterForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.footerNewsLetterInput {
+    @include regularInput();
+    margin-bottom: calculateRem(15px);
+}
+
+.footerNewsLetterSubmit {
+    @include regularButton($w: 220px);
+}
+
+//contactMe
+
+.footerContactMe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: calculateRem(75px) 0;
+}
+
+.footerContactMeChanels {
+    margin-bottom: calculateRem(23px);
+}
+
+.footerContactMeChanelsItem {
+    display: flex;
+    align-items: center;
+    padding: calculateRem(2.5px) 0;
+}
+
+.footerContactMeChanelsImg {
+    margin-right: calculateRem(13px);
+}
+
+.footerContactMeSocialMedia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.footerContactMeSocialMediaItem {
+    &:first-child {
+        margin-right: calculateRem(15px);
+    }
+}
+
+.footerContactMeSocialMediaImg {}
+
+// copyright
+
+.footerCopyRigth {
+    @include container-wrap();
+    @include font-size($f-size-sm);
+    padding-top: calculateRem(18px);
+    padding-bottom: calculateRem(22px);
+    background: $c-brand-secundary;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    line-height: 1.3;    
+}
+
+.footerCopyRigthTerms {}
+
+.footerCopyRigthPoweredBy {
+    
+}
+
+
+:export {
+    footer: footer;
+    footerContainer: footerContainer;
+    footerNewManRm: footerNewManRm;
+    footerNewManImg: footerNewManImg;
+    footerNewManDescription: footerNewManDescription;
+    footerNewsLetter: footerNewsLetter;
+    footerNewsLetterTitle: footerNewsLetterTitle;
+    footerNewsLetterForm: footerNewsLetterForm;
+    footerNewsLetterInput: footerNewsLetterInput;
+    footerNewsLetterSubmit: footerNewsLetterSubmit;
+    footerContactMe: footerContactMe;
+    footerContactMeChanels: footerContactMeChanels;
+    footerContactMeChanelsItem: footerContactMeChanelsItem;
+    footerContactMeChanelsImg: footerContactMeChanelsImg;
+    footerContactMeChanelsLabel: footerContactMeChanelsLabel;
+    footerContactMeSocialMedia: footerContactMeSocialMedia;
+    footerContactMeSocialMediaItem: footerContactMeSocialMediaItem;
+    footerContactMeSocialMediaImg: footerContactMeSocialMediaImg;
+    footerCopyRigth: footerCopyRigth;
+    footerCopyRigthTerms: footerCopyRigthTerms;
+    footerCopyRigthPoweredBy: footerCopyRigthPoweredBy;
+}
