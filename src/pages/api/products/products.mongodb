@@ -1,0 +1,108 @@
+use("test");
+db.products.insertMany([
+    {
+        "reference": "Tech",
+        "name": "Celular Samsung Galaxy S21",
+        "description": "Pantalla de 6.2 pulgadas, procesador Exynos 2100, 8GB de RAM, cámara trasera triple de 12+12+64MP y frontal de 10MP",
+        "price": 799,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Vehicle",
+        "name": "Moto Yamaha YZF-R6",
+        "description": "Moto deportiva de alta velocidad, con un motor de 600 cc y chasis de aluminio fundido. Diseñada para carreras y conducción de alto rendimiento, con un estilo aerodinámico y agresivo.",
+        "price": 12499,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Tech",
+        "name": "Televisor LG OLED55CX",
+        "description": "Pantalla OLED de 55 pulgadas, resolución 4K, procesador α9 Gen3, Dolby Vision IQ, HDMI 2.1 y compatibilidad con G-Sync y FreeSync",
+        "price": 1499,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Sport",
+        "name": "Balón de fútbol Adidas Tango 'The Messi'",
+        "description": "Balón de fútbol inspirado en el balón que usaba Lionel Messi cuando era niño. Diseñado por la marca Adidas con materiales de alta calidad y con el famoso estilo Tango. Perfecto para partidos y entrenamientos.",
+        "price": 39.99,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Vehicle",
+        "name": "Carro Tesla Model S Plaid",
+        "description": "Sedán eléctrico de lujo y alto rendimiento, con un motor eléctrico de 1.020 caballos de fuerza y una velocidad máxima de 320 km/h. Incluye características avanzadas de tecnología y seguridad, y un diseño elegante y moderno.",
+        "price": 139990,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Tech",
+        "name": "Cámara Mirrorless Sony Alpha a7 III",
+        "description": "Sensor CMOS full-frame de 24.2 megapíxeles, estabilización de imagen de 5 ejes, enfoque automático de 693 puntos, grabación de video 4K",
+        "price": 2199,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Vehicle",
+        "name": "Carro BMW M5 Competition",
+        "description": "Sedán de lujo y alto rendimiento, con un motor V8 de 4.4 litros y 625 caballos de fuerza. Incluye características avanzadas de seguridad y tecnología, y un diseño elegante y aerodinámico.",
+        "price": 124999,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Tech",
+        "name": "Auriculares inalámbricos Bose QuietComfort 35 II",
+        "description": "Cancelación de ruido activa, control por voz, Bluetooth y NFC, hasta 20 horas de duración de batería por carga",
+        "price": 299,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Sport",
+        "name": "Bicicleta eléctrica Trek Verve+ 2",
+        "description": "Motor Bosch Performance Line de 250 vatios, batería de 500 Wh, cambio Shimano de 9 velocidades, frenos de disco hidráulicos",
+        "price": 2599,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Vehicle",
+        "name": "Moto Harley Davidson Sportster Iron 883",
+        "description": "Moto de estilo retro y deportivo, con motor Evolution de 883 cc, suspensión trasera ajustable y frenos de disco. Diseñada para los amantes de la velocidad y la adrenalina.",
+        "price": 8999,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Tech",
+        "name": "Impresora multifunción HP Color LaserJet Pro MFP M281fdw",
+        "description": "Impresión a color, copiado, escaneo, fax, Wi-Fi, NFC, impresión automática a doble cara, pantalla táctil de 2,7 pulgadas",
+        "price": 429,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Tech",
+        "name": "Consola de videojuegos Xbox Series X",
+        "description": "Procesador AMD Zen 2 de 8 núcleos, GPU AMD RDNA 2 de 12 teraflops, almacenamiento SSD de 1TB, compatibilidad con 4K y 120 fps",
+        "price": 499,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Sport",
+        "name": "Equipo de Escalada Mammut",
+        "description": "Equipo de escalada compuesto por arnés, casco, cuerda, mosquetones y dispositivos de frenado. Todo el equipo cumple con las normas de seguridad europeas.",
+        "price": 799,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Tech",
+        "name": "Smartwatch Garmin Forerunner 945",
+        "description": "GPS, música, monitoreo de rendimiento, seguimiento de actividad y sueño, pago sin contacto, duración de la batería hasta 2 semanas",
+        "price": 599,
+        "taxes": 0.19
+    },
+    {
+        "reference": "Sport",
+        "name": "Balón de fútbol Nike Premier Team",
+        "description": "Balón de fútbol oficial de la marca Nike, confeccionado con materiales de alta calidad y diseño moderno. Perfecto para partidos y entrenamientos.",
+        "price": 29.99,
+        "taxes": 0.19
+    }
+])
