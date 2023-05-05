@@ -1,0 +1,34 @@
+// PAGE MANAGER:
+
+div.HOME-PAGE,
+div.DASHBOARD-PAGE,
+div.PRODUCTS-PAGE {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+// Pages withOut backtop footer:
+div.HOME-PAGE {
+    position: relative;
+    background: #00222B;
+
+}
+
+//[Unic Styles]
+// HOME PAGE
+div.HOME-PAGE {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+// to wrap the main section class on the pages.
+.main-products,
+.manage-products,
+.main-home {
+    @include container-wrap;
+    @include centerContent;
+}

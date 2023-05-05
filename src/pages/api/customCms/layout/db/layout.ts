@@ -5,17 +5,17 @@ export const layout: LayoutConfig = {
         brandImage: {
             src: "/assets/logos/centribal-logo.svg",
             alt: "",
-            width: 58,
-            height: 58,
+            width: 40,
+            height: 40,
         },
         buttonMenu: {
-            src: '/assets/icons/navbar.png',
+            src: '/assets/logos/navbar.png',
             alt: 'menu button',
             width: 31,
             height: 18,
         },
         backTo: {
-            src: '/assets/icons/backTo.png',
+            src: '/assets/logos/backTo.png',
             alt: 'BackTo',
             width: 40,
             height: 40,

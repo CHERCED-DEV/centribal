@@ -16,29 +16,16 @@ export function pageClassDynamicBody(id: string): {
   
   // Assign class based on pathname
   const pageClassMap: PageClassMap = {
-    "/aboutMe": "ABOUTME-PAGE",
-    "/blog": "BLOG-PAGE",
-    "/contactMe": "CONTACTME-PAGE",
-    "/": "HOME-PAGE",
-    "/portfolio": "PORTFOLIO-PAGE",
-    "/services": "SERVICES-PAGE",
-    "/portfolio/[id]": "PROJECTS-PAGE",
-    "/blog/[id]": "BLOG-POST--PAGE",
-    "/inbox": "INBOX--PAGE",
-    
+    "/products": "PRODUCTS-PAGE",
+    "/dashboard": "DASHBOARD-PAGE",
+    "/": "HOME-PAGE",    
   };
 
   //Assign class based on pageClass
   const mainClassMap: mainClassMap = {
-    "ABOUTME-PAGE": "aboutMe",
-    "BLOG-PAGE": "blog",
-    "CONTACTME-PAGE": "contactMe",
+    "PRODUCTS-PAGE": "main-products",
+    "DASHBOARD-PAGE": "manage-products",
     "HOME-PAGE": "main-home",
-    "PORTFOLIO-PAGE": "portfolio",
-    "SERVICES-PAGE": "services",
-    "PROJECTS-PAGE": "projects",
-    "BLOG-POST--PAGE": "post",
-    "INBOX--PAGE": "inbox",
   };
 
   if (pageClassMap[ctx]) {

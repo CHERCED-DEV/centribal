@@ -9,20 +9,11 @@ export const dinamycReaderOptions = (
     const newOptions = options.map((option) => ({ ...option }));
 
     switch (pageClass) {
-        case "ABOUTME-PAGE":
-            optionToReplace = "About me";
+        case "PRODUCTS-PAGE":
+            optionToReplace = "Products";
         break;
-        case "BLOG-PAGE":
-            optionToReplace = "Blog";
-        break;
-        case "CONTACTME-PAGE":
-            optionToReplace = "Contact Me";
-        break;
-        case "PORTFOLIO-PAGE":
-            optionToReplace = "Portfolio";
-        break;
-        case "SERVICES-PAGE":
-            optionToReplace = "Services";
+        case "DASHBOARD-PAGE":
+            optionToReplace = "Dash Board";
         break;
         default:
         return options;

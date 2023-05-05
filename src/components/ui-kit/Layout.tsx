@@ -1,6 +1,7 @@
 import React, { ReactNode, Suspense, lazy, memo, useCallback, useEffect, useState } from 'react';
 import { LayoutCmsConfig } from './utils/layout.interface';
 import { usePortalProvider } from '@/utils/providers/modalProvider';
+import { useRouter } from 'next/router';
 
 interface LayOutDataProps {
     children: ReactNode | JSX.Element | JSX.Element[];
@@ -14,26 +15,35 @@ const Header = lazy(() => import("./header/Header"));
 const Footer = lazy(() => import("./footer/footer"));
 
 const Layout: React.FC<LayOutDataProps> = ({ children, mainClass, pageClass }) => {
-    const { headerSimple, setHeaderSimple } = usePortalProvider();
+    const router = useRouter();
+    const id = router.pathname;
+    const { headerSimple, setHeaderSimple, handleSubMenu, sethandleSubMenu } = usePortalProvider();
     const [layoutData, setLayoutData] = useState<LayoutCmsConfig>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [initialStorageValue, setInitialStorageValue] = useState<boolean>(false);
 
     const getLayoutData = useCallback(async () => {
-        debugger
         const data = await fetch("/api/customCms/layout");
         const res = await data.json();
         console.log(res)
         if (data !== null) {
             setLayoutData(res)
-            console.log(layoutData);
         }
     }, [])
 
+    
+    
     useEffect(() => {
-        
+        const closeNav = (): void => {
+            sethandleSubMenu(false);
+        }
+        closeNav();
+    }, [id,sethandleSubMenu]);
+    
+
+    useEffect(() => {
         getLayoutData();
-    }, [])
+    }, [getLayoutData])
 
     useEffect(() => {
         if (pageClass == "BLOG-POST--PAGE" || pageClass == "PROJECTS-PAGE" || pageClass == "INBOX--PAGE") {

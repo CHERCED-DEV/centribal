@@ -39,11 +39,10 @@ const Header: React.FC<HeaderPropsConfig> = ({ header, pageClass, headerSimple, 
                     <div className={styles.headerImg}>
                         {header?.brandImage?.src && (
                             <Image
-                                src={header?.brandImage.src}
-                                alt={header?.brandImage.alt}
-                                fill={false}
-                                width={64}
-                                height={64}
+                                src={header.brandImage.src}
+                                alt={header.brandImage.alt}
+                                width={header.brandImage.width}
+                                height={header.brandImage.height}
                             />
                         )}
                     </div>
@@ -54,11 +53,10 @@ const Header: React.FC<HeaderPropsConfig> = ({ header, pageClass, headerSimple, 
                                 >
                                     {header?.buttonMenu.src && (
                                         <Image
-                                            src={header?.buttonMenu?.src}
-                                            alt={header?.buttonMenu?.alt}
-                                            fill={false}
-                                            width={31}
-                                            height={18}
+                                            src={header.buttonMenu.src}
+                                            alt={header.buttonMenu.alt}
+                                            width={header.buttonMenu.width}
+                                            height={header.buttonMenu.height}
                                         />
                                     )}
                                 </div>
@@ -71,8 +69,8 @@ const Header: React.FC<HeaderPropsConfig> = ({ header, pageClass, headerSimple, 
                                 <div className={styles.headerBackToButtonImg}>
                                     {header?.brandImage.src && (
                                         <Image
-                                            src={header?.backTo.src}
-                                            alt={header?.backTo.alt}
+                                            src={header.backTo.src}
+                                            alt={header.backTo.alt}
                                             fill={false}
                                             width={32}
                                             height={32}
