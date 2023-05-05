@@ -10,7 +10,7 @@ dbConnect();
 const productsApi: Application = jsonServer.create();
 
 productsApi.get("/api/products", async (req: Request, res: Response) => {
-    const products = await Product.find();
+    const products: ProductsConfig | ProductsConfig[] = await Product.find();
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(products);
 });
