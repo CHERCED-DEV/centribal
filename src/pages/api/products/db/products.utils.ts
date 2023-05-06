@@ -5,8 +5,8 @@ export interface ProductsConfig {
     description: string;
     price: number;
     taxes: string;
-    createdAt: Date;
-    updatedAt:Date;
+    createdAt?: Date;
+    updatedAt?:Date;
 }
 
 
