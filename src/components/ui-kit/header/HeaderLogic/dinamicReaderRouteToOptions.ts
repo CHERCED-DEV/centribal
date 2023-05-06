@@ -5,15 +5,12 @@ export const dinamycReaderOptions = (
     options: ListItems[]
 ): ListItems[] => {
     let optionToReplace: string = "";
-    const homePath: ListItems = { title: "Home", href: "/" };
+    const homePath: ListItems = { title: "DashBoard", href: "/" };
     const newOptions = options.map((option) => ({ ...option }));
 
     switch (pageClass) {
         case "PRODUCTS-PAGE":
             optionToReplace = "Products";
-        break;
-        case "DASHBOARD-PAGE":
-            optionToReplace = "Dash Board";
         break;
         default:
         return options;

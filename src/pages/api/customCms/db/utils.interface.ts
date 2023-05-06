@@ -1,3 +1,5 @@
+import { DashBoardConfig } from "@/components/mains/dashboard/utils/dashboard.interface";
+
 export interface ImgConfig {
   src: string;
   alt: string;
@@ -22,4 +24,8 @@ interface Link {
 // special config for contexts
 export interface ContextProviderProps {
   children: React.ReactNode | JSX.Element | JSX.Element[];
+}
+
+
+export interface CmsStaticConfig {
 }

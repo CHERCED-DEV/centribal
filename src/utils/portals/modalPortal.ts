@@ -1,9 +1,9 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-function Modal({ children }: { children: ReactNode }) {
+function Portal({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
-  const portal = document.getElementById("modal");
+  const portal = document.getElementById("board");
 
   useEffect(() => {
     setMounted(true);
@@ -14,4 +14,4 @@ function Modal({ children }: { children: ReactNode }) {
   return mounted ? createPortal(children, portal || document.body) : null;
 }
 
-export { Modal };
+export { Portal };

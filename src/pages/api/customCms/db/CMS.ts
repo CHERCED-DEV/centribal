@@ -1,4 +1,10 @@
+import { CmsStaticConfig } from "./utils.interface";
 
-export const CMS: {[key:string]: string} = {
+export const CMS:CmsStaticConfig = {
+    aside:[
+        "Orders",
+        "Inventory",
+        "New order"
+    ]
     
 }

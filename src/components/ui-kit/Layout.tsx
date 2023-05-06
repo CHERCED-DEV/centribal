@@ -46,7 +46,7 @@ const Layout: React.FC<LayOutDataProps> = ({ children, mainClass, pageClass }) =
     }, [getLayoutData])
 
     useEffect(() => {
-        if (pageClass == "BLOG-POST--PAGE" || pageClass == "PROJECTS-PAGE" || pageClass == "INBOX--PAGE") {
+        if (pageClass == "EDIT-PRODUCT--PAGE") {
             setHeaderSimple(false);
         }
     }, [pageClass])

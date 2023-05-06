@@ -16,16 +16,16 @@ export function pageClassDynamicBody(id: string): {
   
   // Assign class based on pathname
   const pageClassMap: PageClassMap = {
-    "/products": "PRODUCTS-PAGE",
-    "/dashboard": "DASHBOARD-PAGE",
-    "/": "HOME-PAGE",    
+    "/editProduct/[_id]": "EDIT-PRODUCT--PAGE",
+    "/createProducts": "PRODUCTS-PAGE",
+    "/": "DASHBOARD-PAGE",    
   };
 
   //Assign class based on pageClass
   const mainClassMap: mainClassMap = {
+    "EDIT-PRODUCT--PAGE": "manage-products",
     "PRODUCTS-PAGE": "main-products",
-    "DASHBOARD-PAGE": "manage-products",
-    "HOME-PAGE": "main-home",
+    "DASHBOARD-PAGE": "main-home",
   };
 
   if (pageClassMap[ctx]) {

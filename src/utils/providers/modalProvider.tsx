@@ -6,22 +6,22 @@ const PortalContext = createContext<{
     sethandleSubMenu: React.Dispatch<React.SetStateAction<boolean>>;
     headerSimple: boolean;
     setHeaderSimple: React.Dispatch<React.SetStateAction<boolean>>;
-    modalSwitch: boolean;
-    setModalSwitch: React.Dispatch<React.SetStateAction<boolean>>;
+    portalSwitch: boolean;
+    setPortalSwitch: React.Dispatch<React.SetStateAction<boolean>>;
 
 }>({
     handleSubMenu: false,
     sethandleSubMenu: () => { },
     headerSimple: true,
     setHeaderSimple: () => { },
-    modalSwitch: false,
-    setModalSwitch: () => { },
+    portalSwitch: false,
+    setPortalSwitch: () => { },
 });
 
 export const PortalContextProvider = ({ children }: ContextProviderProps) => {
     const [headerSimple, setHeaderSimple] = useState<boolean>(true);
     const [handleSubMenu, sethandleSubMenu] = useState<boolean>(false);
-    const [modalSwitch, setModalSwitch] = useState<boolean>(false);
+    const [portalSwitch, setPortalSwitch] = useState<boolean>(false);
 
 
 
@@ -32,8 +32,8 @@ export const PortalContextProvider = ({ children }: ContextProviderProps) => {
                 sethandleSubMenu,
                 setHeaderSimple,
                 headerSimple,
-                modalSwitch,
-                setModalSwitch,
+                portalSwitch,
+                setPortalSwitch,
             }}
         >
             {children}
