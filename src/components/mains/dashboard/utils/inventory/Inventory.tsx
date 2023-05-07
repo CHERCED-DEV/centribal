@@ -1,7 +1,8 @@
+import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import React, { useState, useEffect } from 'react';
 
 const Inventory = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProductsConfig[]>();
   const [sortKey, setSortKey] = useState('');
   const [sortOrder, setSortOrder] = useState('');
 
