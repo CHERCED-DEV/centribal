@@ -25,31 +25,31 @@ const Layout: React.FC<LayOutDataProps> = ({ children, mainClass, pageClass }) =
     const getLayoutData = useCallback(async () => {
         const data = await fetch("/api/customCms/layout");
         const res = await data.json();
-        console.log(res)
         if (data !== null) {
             setLayoutData(res)
         }
     }, [])
 
-    
-    
-    useEffect(() => {
-        const closeNav = (): void => {
-            sethandleSubMenu(false);
+    const headerType = useCallback(() => {
+        if (pageClass == "EDIT-PRODUCT--PAGE") {
+            setHeaderSimple(false);
         }
-        closeNav();
-    }, [id,sethandleSubMenu]);
-    
+    }, [pageClass])
 
     useEffect(() => {
         getLayoutData();
     }, [getLayoutData])
 
     useEffect(() => {
-        if (pageClass == "EDIT-PRODUCT--PAGE") {
-            setHeaderSimple(false);
+        headerType()
+    }, [headerType])
+
+    useEffect(() => {
+        const closeNav = (): void => {
+            sethandleSubMenu(false);
         }
-    }, [pageClass])
+        closeNav();
+    }, [id, sethandleSubMenu]);    
 
     useEffect(() => {
         const storedValue = window.sessionStorage.getItem('isLoading');

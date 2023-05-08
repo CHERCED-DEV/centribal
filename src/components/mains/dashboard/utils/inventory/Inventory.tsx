@@ -1,78 +1,90 @@
+import React, { useState, memo } from 'react';
+import { InventoryDataProps } from './utils/inventory.interface';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
-import React, { useState, useEffect } from 'react';
 
-const Inventory = () => {
-  const [products, setProducts] = useState<ProductsConfig[]>();
-  const [sortKey, setSortKey] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
 
-  useEffect(() => {
-    fetchInventory(); // Llama a la función para obtener los datos del inventario
-  }, []);
+const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => {
+    const [sortKey, setSortKey] = useState<keyof ProductsConfig>('name');
+    const [sortOrder, setSortOrder] = useState('');
 
-  const fetchInventory = () => {
-    // Realiza una solicitud fetch a tu endpoint de la API para obtener los datos del inventario
-    // Puedes reemplazar la URL con tu endpoint correspondiente
-    fetch('https://tu-api.com/inventory')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-      .catch(error => console.log(error));
-  };
+    const sortInventory = (key: keyof ProductsConfig) => {
+        if (sortKey === key) {
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+            setSortKey(key);
+            setSortOrder('asc');
+        }
+    };
 
-  const sortInventory = (key) => {
-    if (sortKey === key) {
-      // Si ya se está ordenando por la misma clave, cambia el orden
-      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    } else {
-      // Si se está ordenando por una nueva clave, establece la clave y el orden ascendente
-      setSortKey(key);
-      setSortOrder('asc');
-    }
-  };
+    const sortedProducts = products.sort((a, b) => {
+        const valueA = a[sortKey as keyof typeof a];
+        const valueB = b[sortKey as keyof typeof b];
 
-  const sortedProducts = [...products].sort((a, b) => {
-    // Ordena los productos en función de la clave y el orden seleccionados
-    if (sortOrder === 'desc') {
-      return b[sortKey].localeCompare(a[sortKey]);
-    } else {
-      return a[sortKey].localeCompare(b[sortKey]);
-    }
-  });
+        if (typeof valueA === 'string' && typeof valueB === 'string') {
+            if (sortOrder === 'desc') {
+                return valueB.localeCompare(valueA);
+            } else {
+                return valueA.localeCompare(valueB);
+            }
+        } else if (typeof valueA === 'number' && typeof valueB === 'number') {
+            if (sortOrder === 'desc') {
+                return valueB - valueA;
+            } else {
+                return valueA - valueB;
+            }
+        } else if (typeof valueA === 'boolean' && typeof valueB === 'boolean') {
+            if (sortOrder === 'desc') {
+                return valueB ? -1 : 1;
+            } else {
+                return valueA ? -1 : 1;
+            }
+        } else if (valueA instanceof Date && valueB instanceof Date) {
+            if (sortOrder === 'desc') {
+                return valueB.getTime() - valueA.getTime();
+            } else {
+                return valueA.getTime() - valueB.getTime();
+            }
+        }
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th onClick={() => sortInventory('reference')}>
-            Reference {sortKey === 'reference' && sortOrder === 'asc' ? '▲' : '▼'}
-          </th>
-          <th onClick={() => sortInventory('name')}>
-            Name {sortKey === 'name' && sortOrder === 'asc' ? '▲' : '▼'}
-          </th>
-          <th onClick={() => sortInventory('description')}>
-            Description {sortKey === 'description' && sortOrder === 'asc' ? '▲' : '▼'}
-          </th>
-          <th onClick={() => sortInventory('price')}>
-            Price {sortKey === 'price' && sortOrder === 'asc' ? '▲' : '▼'}
-          </th>
-          <th onClick={() => sortInventory('taxes')}>
-            Taxes {sortKey === 'taxes' && sortOrder === 'asc' ? '▲' : '▼'}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedProducts.map((product) => (
-          <tr key={product.reference}>
-            <td>{product.reference}</td>
-            <td>{product.name}</td>
-            <td>{product.description}</td>
-            <td>{product.price}</td>
-            <td>{product.taxes}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+        return 0; // Si los tipos no son compatibles, se considera que los elementos son iguales
+    })
+
+
+    return (
+        <table className="table">
+            <thead>
+                <tr className="table__row">
+                    <th className="table__cell" onClick={() => sortInventory('reference')}>
+                        {ui_inventory.th.reference} {sortKey === 'reference' && sortOrder === 'asc' ? '▲' : '▼'}
+                    </th>
+                    <th className="table__cell" onClick={() => sortInventory('name')}>
+                        {ui_inventory.th.name} {sortKey === 'name' && sortOrder === 'asc' ? '▲' : '▼'}
+                    </th>
+                    <th className="table__cell" onClick={() => sortInventory('description')}>
+                        {ui_inventory.th.description}{sortKey === 'description' && sortOrder === 'asc' ? '▲' : '▼'}
+                    </th>
+                    <th className="table__cell" onClick={() => sortInventory('price')}>
+                        {ui_inventory.th.price} {sortKey === 'price' && sortOrder === 'asc' ? '▲' : '▼'}
+                    </th>
+                    <th className="table__cell" onClick={() => sortInventory('taxes')}>
+                        {ui_inventory.th.taxes} {sortKey === 'taxes' && sortOrder === 'asc' ? '▲' : '▼'}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {sortedProducts.map((product) => (
+                    <tr className="table__row" key={product.reference}>
+                        <td className="table__cell">{product.reference}</td>
+                        <td className="table__cell">{product.name}</td>
+                        <td className="table__cell">{product.description}</td>
+                        <td className="table__cell">{product.price}</td>
+                        <td className="table__cell">{product.taxes}</td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+
+    );
 };
 
-export default Inventory;
+export default memo(Inventory);

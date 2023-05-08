@@ -1,116 +1,84 @@
-import React from "react";
+import React, { memo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { ClientFlieldsConfig, CreateOrderDataProps } from "./create-order.interface";
 
-const OrderForm = () => {
-    const { register, handleSubmit, errors } = useForm();
+const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
+    const { register, handleSubmit } = useForm<ClientFlieldsConfig>();
 
-    const onSubmit = (data) => {
-        // Aquí puedes enviar los datos del formulario al servidor o realizar otras acciones
+
+    const onSubmit = (data: any) => {
         console.log("Formulario enviado:", data);
     };
 
     return (
-        <div className="user-form">
-            <h3 className="user-form__title">User Form</h3>
+        <section className="user-form">
+            <h3 className="user-form__title">{client.form_title}</h3>
             <form className="user-form__form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="user-form__field">
-                    <label className="user-form__label">Client Name:</label>
+                    <label className="user-form__label">{client.form_client.name}</label>
                     <input
                         className="user-form__input"
                         type="text"
-                        name="client.name"
-                        ref={register({
-                            required: "Client name is required",
-                            maxLength: {
-                                value: 60,
-                                message: "Client name must be less than 60 characters",
-                            },
-                        })}
+                        required={client.fields.name.required}
+                        placeholder={client.fields.name.value}
+                        {...register("name")}
                     />
-                    {errors.client?.name && (
-                        <span className="user-form__error">{errors.client.name.message}</span>
-                    )}
                 </div>
                 <div className="user-form__field">
-                    <label className="user-form__label">Client Email:</label>
-                    <input
-                        className="user-form__input"
-                        type="email"
-                        name="client.email"
-                        ref={register({
-                            required: "Client email is required",
-                            maxLength: {
-                                value: 100,
-                                message: "Client email must be less than 100 characters",
-                            },
-                        })}
-                    />
-                    {errors.client?.email && (
-                        <span className="user-form__error">{errors.client.email.message}</span>
-                    )}
-                </div>
-                <div className="user-form__field">
-                    <label className="user-form__label">Client Phone:</label>
+                    <label className="user-form__label">{client.form_client.email}</label>
                     <input
                         className="user-form__input"
                         type="text"
-                        name="client.phone"
-                        ref={register({
-                            required: "Client phone is required",
-                            maxLength: {
-                                value: 20,
-                                message: "Client phone must be less than 20 characters",
-                            },
-                        })}
+                        required={client.fields.email.required}
+                        placeholder={client.fields.email.value}
+                        {...register("email")}
                     />
-                    {errors.client?.phone && (
-                        <span className="user-form__error">{errors.client.phone.message}</span>
-                    )}
                 </div>
                 <div className="user-form__field">
-                    <label className="user-form__label">Order Number:</label>
+                    <label className="user-form__label">{client.form_client.phone}</label>
                     <input
                         className="user-form__input"
                         type="text"
-                        name="orderNumber"
-                        ref={register({ required: "Order number is required" })}
+                        required={client.fields.phone.required}
+                        placeholder={client.fields.phone.value}
+                        {...register("phone")}
                     />
-                    {errors.orderNumber && (
-                        <span className="user-form__error">{errors.orderNumber.message}</span>
-                    )}
                 </div>
                 <div className="user-form__field">
-                    <label className="user-form__label">Products:</label>
-                    {/* Add logic for products */}
+                    <label className="user-form__label">{client.form_client.product}</label>
+                    <select className="user-form__input" {...register("product")}>
+                        {products.map((product) => (
+                            <option key={product._id} value={product.reference}>
+                                {product.name} - ${product.price}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="user-form__field">
-                    <label className="user-form__label">Order Value:</label>
+                    <label className="user-form__label">{client.form_client.orderValue}</label>
                     <input
                         className="user-form__input"
-                        type="number"
-                        name="orderValue"
-                        ref={register({ required: "Order value is required" })}
+                        type="text"
+                        required={client.fields.orderValue.required}
+                        placeholder={client.fields.orderValue.value}
+                        {...register("orderValue")}
                     />
-                    {errors.orderValue && (
-                        <span className="user-form__error">{errors.orderValue.message}</span>
-                    )}
                 </div>
                 <div className="user-form__field">
-                    <label className="user-form__label">Order Value with Shipping:</label>
+                    <label className="user-form__label">{client.form_client.orderValueWithShipping}</label>
                     <input
                         className="user-form__input"
-                        type="number"
-                        name="orderValueWithShipping"
-                        ref={register({ required: "Order value with shipping is required" })}
+                        type="text"
+                        required={client.fields.orderValueWithShipping.required}
+                        placeholder={client.fields.orderValueWithShipping.value}
+                        {...register("orderValueWithShipping")}
                     />
-                    {errors.orderValueWithShipping && (
-                        <span className="user-form__error">{errors.orderValueWithShipping.message}</span>
-                    )}
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit">{client.submit}</button>
             </form>
-        </div>
+        </section>
     );
 };
 
-export default OrderForm;
+export default memo(OrderForm);
+

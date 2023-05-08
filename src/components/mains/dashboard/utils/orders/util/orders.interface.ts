@@ -1,6 +1,6 @@
-export interface OrdersConfig {
+export interface UIOrdersConfig {
     client: string;
-    num_order: number;
+    num_order: string;
     name_article: {
         title: string;
         art: string;
@@ -11,6 +11,6 @@ export interface OrdersConfig {
     order_value_shipping: string;
 }
 
-export interface OrdersDataProps {
-    order: OrdersConfig;
+export interface UIOrdersDataProps {
+    ui_orders: UIOrdersConfig;
 }

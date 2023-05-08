@@ -1,18 +1,20 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
-import { DashBoardDataProps } from './utils/dashboard.interface';
-import { Portal } from '@/utils/portals/modalPortal';
+import React, { Suspense, lazy, useState } from 'react';
 import Image from 'next/image';
-import { usePortalProvider } from '@/utils/providers/modalProvider';
-import { Orders } from './utils/orders/Orders';
-
-import Inventory from './utils/inventory/Inventory';
-import { CreateOrder } from './utils/create-order/CreateOrder';
+import { DashBoardDataProps } from './utils/dashboard.interface';
+import { Portal, usePortalProvider } from '@/utils/providers/modalProvider';
+import { ProductsConfig } from '@/pages/api/products/db/products.utils';
+import { useGetData } from '@/utils/providers/requests/helpers';
 
 const CentribaLoader = lazy(() => import('@/components/ui-kit/Spiners&Loaders/CentribaLoader'));
+const CreateOrder =lazy(() => import('@/components/mains/dashboard/utils/create-order/CreateOrder'));
+const Inventory =lazy(() => import('@/components/mains/dashboard/utils/inventory/Inventory')); 
+const Orders =lazy(() => import('@/components/mains/dashboard/utils/orders/Orders'));  
 
 export const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
-    const { portalSwitch, setPortalSwitch } = usePortalProvider()
+    const { portalSwitch, setPortalSwitch } = usePortalProvider();
     const [renderPortal, setRenderPortal] = useState<string>("");
+
+    const products = useGetData<ProductsConfig[]>("api/products", "products");
 
     const handlePortal = (option: string) => {
         if (portalSwitch === false) {
@@ -50,15 +52,19 @@ export const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
                 <h2 className='portal__title'>{dashboard.portal.title}</h2>
                 <>
                     {portalSwitch ? (
-                        <Portal>
                             <Suspense fallback={<CentribaLoader />}>
-                                {renderPortal === 'Orders' && <Orders orders={dashboard.portal.components.orders} />}
-                                {renderPortal === 'Inventory' && <Inventory inventory={dashboard.portal.components.inventory} />}
-                                {renderPortal === 'New order' && <CreateOrder create_order={dashboard.portal.components.create_order} />}
+                                {
+                                    products && (
+                                        <>
+                                            {renderPortal === 'Orders' && <Orders ui_orders={dashboard.portal.components.orders} />}
+                                            {renderPortal === 'Inventory' && <Inventory ui_inventory={dashboard.portal.components.inventory} products={products} />}
+                                            {renderPortal === 'New order' && <CreateOrder create_order={dashboard.portal.components.create_order} products={products} />}
+                                        </>
+                                    )
+                                }
                             </Suspense>
-                        </Portal>
                     ) : (<>
-                        <h3 className='portal__welcome-title'>{dashboard.portal.welcome.label}</h3>
+                        <h3 className='portal__welcome-title'>{dashboard.portal.welcome.label} {new Date().toLocaleDateString('en-US', { weekday: 'long' })}</h3>
                         <Image
                             className='portal__welcome-img'
                             src={dashboard.portal.welcome.img.src}

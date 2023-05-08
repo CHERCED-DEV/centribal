@@ -1,27 +1,12 @@
+import React, { memo } from 'react';
 import { OrdersConfig } from '@/pages/api/orders/db/order.utils';
-import React, { useCallback, useEffect, useState } from 'react';
-import { OrdersDataProps } from './util/orders.interface';
+import { UIOrdersDataProps } from './util/orders.interface';
+import { useGetData } from '@/utils/providers/requests/helpers';
 
-export const Orders: React.FC<OrdersDataProps> = ({order}) => {
-    const [orders, setOrders] = useState<OrdersConfig[]>();
-    const fetchOrders = useCallback(async () => {
-        try {
-            const res = await fetch("/api/orders");
-            if (res.status === 200) {
-                const data = await res.json();
-                setOrders(data);
-            } else {
-                throw new Error("we have an error getting the data")
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }, [])
+const Orders: React.FC<UIOrdersDataProps> = ({ ui_orders }) => {
 
-    useEffect(() => {
-        fetchOrders();
-    }, [fetchOrders])
-
+    const orders = useGetData<OrdersConfig[]>("api/orders", "orders");
+    console.log()
     return (
         <>
             {
@@ -30,20 +15,20 @@ export const Orders: React.FC<OrdersDataProps> = ({order}) => {
                         {
                             orders.map((order) => (
                                 <React.Fragment key={order._id}>
-                                    <p className="orders-client">{order.client.name}: {order.client.name}</p>
-                                    <p className="orders-orderNumber">{order.}: {order.orderNumber}</p>
+                                    <p className="orders-client">{ui_orders.client}: {order.client.name}</p>
+                                    <p className="orders-orderNumber">{ui_orders.num_order}: {order.orderNumber}</p>
                                     <div className="orders__article">
-                                        <p className="orders__article-header">{}</p>
+                                        <p className="orders__article-header">{ui_orders.name_article.title}</p>
                                         {
-                                        order.order.map((article) => (
-                                            <p key={article._id} className="orders-orderItemName">Nombre del artículo: {article.name}</p>
-                                        ))
+                                            order.order.map((article) => (
+                                                <p key={article._id} className="orders-orderItemName">{ui_orders.name_article.art}: {article.name}</p>
+                                            ))
                                         }
                                     </div>
-                                    <p className="orders-delivered">Entregado: {order.delivered ? 'Sí' : 'No'}</p>
-                                    <p className="orders-paid">Pagado: {order.paid ? 'Sí' : 'No'}</p>
-                                    <p className="orders-orderValue">Valor de la Orden (sin envío): ${order.orderValue}</p>
-                                    <p className="orders-orderValueWithShipping">Valor de la Orden (con envío): ${order.orderValueWithShipping}</p>
+                                    <p className="orders-delivered">{ui_orders.delivered}: {order.delivered ? 'Yes' : 'No'}</p>
+                                    <p className="orders-paid">{ui_orders.paid}: {order.paid ? 'Yes' : 'No'}</p>
+                                    <p className="orders-orderValue">{ui_orders.order_value}: ${order.orderValue}</p>
+                                    <p className="orders-orderValueWithShipping">{ui_orders.order_value_shipping}: ${order.orderValueWithShipping}</p>
                                     <hr className="orders-separator" />
                                 </React.Fragment>
                             ))
@@ -54,3 +39,5 @@ export const Orders: React.FC<OrdersDataProps> = ({order}) => {
         </>
     );
 };
+
+export default memo(Orders);

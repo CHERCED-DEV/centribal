@@ -1,0 +1,35 @@
+use("test");
+db.orders.insertOne({
+    "client": {
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "phone": "1234567890"
+    },
+    "orderNumber": "ABC123",
+    "order": [
+        {
+            "_id": "1",
+            "reference": "PROD001",
+            "name": "Product 1",
+            "description": "This is product 1",
+            "price": 10,
+            "taxes": 2,
+            "createdAt": "2023-05-07T12:00:00Z",
+            "updatedAt": "2023-05-07T12:00:00Z"
+        },
+        {
+            "_id": "2",
+            "reference": "PROD002",
+            "name": "Product 2",
+            "description": "This is product 2",
+            "price": 15,
+            "taxes": 3,
+            "createdAt": "2023-05-07T12:00:00Z",
+            "updatedAt": "2023-05-07T12:00:00Z"
+        }
+    ],
+    "delivered": false,
+    "paid": false,
+    "orderValue": 25,
+    "orderValueWithShipping": 30
+})

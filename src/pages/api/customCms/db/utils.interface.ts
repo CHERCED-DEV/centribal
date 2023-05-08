@@ -25,7 +25,10 @@ interface Link {
 export interface ContextProviderProps {
   children: React.ReactNode | JSX.Element | JSX.Element[];
 }
-
-
 export interface CmsStaticConfig {
+    dashboard: DashBoardConfig;
+}
+
+export interface UiStaticData {
+    CMS: CmsStaticConfig;
 }
