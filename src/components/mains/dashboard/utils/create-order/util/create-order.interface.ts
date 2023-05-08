@@ -37,10 +37,14 @@ export interface CreateOrderConfig {
         orderValue: string;
         orderValueWithShipping: string;
     }
+    addmore: string;
     fields: ClientFlieldsConfig;
     submit: string;
 }
 
+export interface PurchaseConfig {
+    
+}
 export interface CreateOrderContainerDataProps {
     create_order: CreateOrderConfig;
     products: ProductsConfig[];

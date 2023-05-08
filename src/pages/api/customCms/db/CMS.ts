@@ -81,6 +81,7 @@ export const CMS: CmsStaticConfig = {
                             required: true
                         }
                     },
+                    addmore: "Add",
                     submit: "Submit",
                 }
             },

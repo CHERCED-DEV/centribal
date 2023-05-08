@@ -4,7 +4,7 @@ export interface ProductsConfig {
 	name: string;
 	description: string;
 	price: number;
-	taxes: string;
+	taxes: number;
 	createdAt?: Date;
 	updatedAt?: Date;
 }

@@ -1,12 +1,24 @@
 import React, { memo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ClientFlieldsConfig, CreateOrderDataProps } from "./create-order.interface";
+import { ProductsConfig } from "@/pages/api/products/db/products.utils";
 
 const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
-    const { register, handleSubmit } = useForm<ClientFlieldsConfig>();
+    const { register, handleSubmit, watch } = useForm<ClientFlieldsConfig>();
+    const [purchase, setPurchase] = useState<ProductsConfig[]>();
 
+    const handleAddToPurchase = () => {
+        // Get the selected product from the form data
+        const selectedProduct = watch('product');
+      
+        // Find the product in the products array based on its reference
+        const productToAdd = products.find((product) => product.reference === selectedProduct);
+      
+        // Add the product to the purchase array
+        setPurchase((prevPurchase) => [...prevPurchase, productToAdd]);
+      };
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: ClientFlieldsConfig) => {
         console.log("Formulario enviado:", data);
     };
 
@@ -53,26 +65,14 @@ const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
                             </option>
                         ))}
                     </select>
+                    <button className="user-form__button" onClick={} >{client.addmore}</button>
                 </div>
-                <div className="user-form__field">
-                    <label className="user-form__label">{client.form_client.orderValue}</label>
-                    <input
-                        className="user-form__input"
-                        type="text"
-                        required={client.fields.orderValue.required}
-                        placeholder={client.fields.orderValue.value}
-                        {...register("orderValue")}
-                    />
-                </div>
-                <div className="user-form__field">
-                    <label className="user-form__label">{client.form_client.orderValueWithShipping}</label>
-                    <input
-                        className="user-form__input"
-                        type="text"
-                        required={client.fields.orderValueWithShipping.required}
-                        placeholder={client.fields.orderValueWithShipping.value}
-                        {...register("orderValueWithShipping")}
-                    />
+                <div className="user-form__sell-resume">
+                            {
+                                purchase?.map((item)=>(
+                                    <span key={item._id}>{item.name}: {item.price}</span>
+                                ))
+                            }
                 </div>
                 <button type="submit">{client.submit}</button>
             </form>

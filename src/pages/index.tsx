@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { UiStaticData } from './api/customCms/db/utils.interface';
 
 export default function Home({ CMS }: UiStaticData) {
-    console.log(CMS)
     return (
         <>
             <Head>

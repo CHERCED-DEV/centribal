@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { InventoryDataProps } from './utils/inventory.interface';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 
@@ -6,6 +6,7 @@ import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => {
     const [sortKey, setSortKey] = useState<keyof ProductsConfig>('name');
     const [sortOrder, setSortOrder] = useState('');
+    const [sortedProducts, setSortedProducts] = useState(products); // Crear una copia del array original
 
     const sortInventory = (key: keyof ProductsConfig) => {
         if (sortKey === key) {
@@ -14,40 +15,58 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
             setSortKey(key);
             setSortOrder('asc');
         }
+        setNewOrder(sortKey);
     };
 
-    const sortedProducts = products.sort((a, b) => {
-        const valueA = a[sortKey as keyof typeof a];
-        const valueB = b[sortKey as keyof typeof b];
+    const setNewOrder = (sortKey: keyof ProductsConfig) => {
+        let sorted: ProductsConfig[] = [...sortedProducts];
 
-        if (typeof valueA === 'string' && typeof valueB === 'string') {
-            if (sortOrder === 'desc') {
-                return valueB.localeCompare(valueA);
-            } else {
-                return valueA.localeCompare(valueB);
-            }
-        } else if (typeof valueA === 'number' && typeof valueB === 'number') {
-            if (sortOrder === 'desc') {
-                return valueB - valueA;
-            } else {
-                return valueA - valueB;
-            }
-        } else if (typeof valueA === 'boolean' && typeof valueB === 'boolean') {
-            if (sortOrder === 'desc') {
-                return valueB ? -1 : 1;
-            } else {
-                return valueA ? -1 : 1;
-            }
-        } else if (valueA instanceof Date && valueB instanceof Date) {
-            if (sortOrder === 'desc') {
-                return valueB.getTime() - valueA.getTime();
-            } else {
-                return valueA.getTime() - valueB.getTime();
-            }
+        switch (sortKey) {
+            case 'reference':
+                sorted.sort((a, b) => {
+                    if (sortOrder === 'asc') {
+                        return a.reference.localeCompare(b.reference);
+                    } else {
+                        return b.reference.localeCompare(a.reference);
+                    }
+                });
+                setSortedProducts(sorted);
+                break;
+            case 'name':
+                sorted.sort((a, b) => {
+                    if (sortOrder === 'asc') {
+                        return a.name.localeCompare(b.name);
+                    } else {
+                        return b.name.localeCompare(a.name);
+                    }
+                });
+                setSortedProducts(sorted);
+                break;
+            case 'price':
+                sorted.sort((a, b) => {
+                    if (sortOrder === 'asc') {
+                        return a.price - b.price;
+                    } else {
+                        return b.price - a.price;
+                    }
+                });
+                setSortedProducts(sorted);
+                break;
+            case 'taxes':
+                sorted.sort((a, b) => {
+                    if (sortOrder === 'asc') {
+                        return a.taxes - b.taxes;
+                    } else {
+                        return b.taxes - a.taxes;
+                    }
+                });
+                setSortedProducts(sorted);
+                break;
+            default:
+                break;
         }
+    };
 
-        return 0; // Si los tipos no son compatibles, se considera que los elementos son iguales
-    })
 
 
     return (
@@ -60,8 +79,8 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
                     <th className="table__cell" onClick={() => sortInventory('name')}>
                         {ui_inventory.th.name} {sortKey === 'name' && sortOrder === 'asc' ? '▲' : '▼'}
                     </th>
-                    <th className="table__cell" onClick={() => sortInventory('description')}>
-                        {ui_inventory.th.description}{sortKey === 'description' && sortOrder === 'asc' ? '▲' : '▼'}
+                    <th className="table__cell" >
+                        {ui_inventory.th.description}
                     </th>
                     <th className="table__cell" onClick={() => sortInventory('price')}>
                         {ui_inventory.th.price} {sortKey === 'price' && sortOrder === 'asc' ? '▲' : '▼'}
@@ -73,7 +92,7 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
             </thead>
             <tbody>
                 {sortedProducts.map((product) => (
-                    <tr className="table__row" key={product.reference}>
+                    <tr className="table__row" key={product._id}>
                         <td className="table__cell">{product.reference}</td>
                         <td className="table__cell">{product.name}</td>
                         <td className="table__cell">{product.description}</td>
