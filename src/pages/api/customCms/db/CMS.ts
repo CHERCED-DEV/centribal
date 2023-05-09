@@ -47,39 +47,24 @@ export const CMS: CmsStaticConfig = {
                 },
                 create_order: {
                     title: "Create Order",
-                    form_title: "Order Form",
-                    form_client: {
-                        name: "Name",
-                        email: "Email",
-                        phone: "Phone",
-                        product: "Product",
-                        orderValue: "Order Value",
-                        orderValueWithShipping: "Order Value with Shipping"
-                    },
-                    fields: {
-                        name: {
+                    form_title: "Order Form",             
+                    fields:[
+                        {
                             value: "Name",
                             required: true
                         },
-                        email: {
+                        {
                             value: "Email",
                             required: true
                         },
-                        phone: {
+                        {
                             value: "Phone",
                             required: true
                         },
-                        product: {
-                            required: true
-                        },
-                        orderValue: {
-                            value: "Order Value",
-                            required: true
-                        },
-                        orderValueWithShipping: {
-                            value: "Order Value with Shipping",
-                            required: true
-                        }
+                    ],
+                    product: {
+                        title: "Products",
+                        resume: "Order Resume"
                     },
                     addmore: "Add",
                     submit: "Submit",
