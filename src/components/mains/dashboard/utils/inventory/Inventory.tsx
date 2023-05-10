@@ -1,12 +1,15 @@
 import React, { useState, memo, useEffect } from 'react';
-import { InventoryDataProps } from './utils/inventory.interface';
+import { InventoryDataProps, deleteProduct } from './utils/inventory.interface';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 
 const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => {
     const [sortKey, setSortKey] = useState<keyof ProductsConfig>('name');
     const [sortOrder, setSortOrder] = useState('');
-    const [sortedProducts, setSortedProducts] = useState(products); // Crear una copia del array original
+    const [sortedProducts, setSortedProducts] = useState(products);
+    const router = useRouter();
 
     const sortInventory = (key: keyof ProductsConfig) => {
         if (sortKey === key) {
@@ -67,6 +70,33 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
         }
     };
 
+    const optionProduct = (_id: string, option: string) => {
+        if (option === "delete") {
+            return (
+                <button className='' onClick={() => deleteProduct(_id)}>
+                    <Image
+                        className=''
+                        src={"/assets/logos/delete.svg"}
+                        alt='edit'
+                        width={24}
+                        height={24}
+                    />
+                </button>
+            )
+        } else {
+            return (
+                <button className='' onClick={() => router.push(`editProduct/${_id}`)}>
+                    <Image
+                        className=''
+                        src={"/assets/logos/edit.svg"}
+                        alt='edit'
+                        width={24}
+                        height={24}
+                    />
+                </button>
+            )
+        }
+    }
 
 
     return (
@@ -88,6 +118,16 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
                     <th className="table__cell" onClick={() => sortInventory('taxes')}>
                         {ui_inventory.th.taxes} {sortKey === 'taxes' && sortOrder === 'asc' ? '▲' : '▼'}
                     </th>
+                    {router.asPath !== "/" && (
+                        <>
+                            <th className="table__cell">
+                                {ui_inventory.th.edit}
+                            </th>
+                            <th className="table__cell">
+                                {ui_inventory.th.delete}
+                            </th>
+                        </>
+                    )}
                 </tr>
             </thead>
             <tbody>
@@ -98,6 +138,12 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
                         <td className="table__cell">{product.description}</td>
                         <td className="table__cell">{product.price}</td>
                         <td className="table__cell">{product.taxes}</td>
+                        {router.asPath !== "/" && (
+                            <>
+                            <td className="table__cell">{product?._id && optionProduct(product._id, "edit")}</td>
+                            <td className="table__cell">{product?._id && optionProduct(product._id, "delete")}</td>
+                            </>
+                        )}
                     </tr>
                 ))}
             </tbody>

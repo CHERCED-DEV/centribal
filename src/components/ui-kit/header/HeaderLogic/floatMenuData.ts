@@ -6,5 +6,9 @@ export let floatMenuData: { [key: string]: ListItems[] } = {
       title: "Create Products",
       href: "createProduct",
     },
+    {
+      title: "Edit Products",
+      href: "editProduct",
+    },
   ],
 };

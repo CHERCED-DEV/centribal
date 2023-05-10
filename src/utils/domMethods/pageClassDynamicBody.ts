@@ -13,17 +13,19 @@ export function pageClassDynamicBody(id: string): {
   const ctx = id;
   let pageClass = "";
   let mainClass = "";
-  
+
   // Assign class based on pathname
   const pageClassMap: PageClassMap = {
     "/editProduct/[_id]": "EDIT-PRODUCT--PAGE",
+    "/editProduct": "EDIT-PRODUCTS--PAGE",
     "/createProduct": "PRODUCTS-PAGE",
-    "/": "DASHBOARD-PAGE",    
+    "/": "DASHBOARD-PAGE",
   };
 
   //Assign class based on pageClass
   const mainClassMap: mainClassMap = {
-    "EDIT-PRODUCT--PAGE": "manage-products",
+    "EDIT-PRODUCT--PAGE": "manage-product",
+    "EDIT-PRODUCTS--PAGE": "edit-products",
     "PRODUCTS-PAGE": "main-products",
     "DASHBOARD-PAGE": "main-home",
   };

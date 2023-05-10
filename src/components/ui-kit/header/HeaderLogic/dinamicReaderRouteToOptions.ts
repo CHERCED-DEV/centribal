@@ -12,6 +12,9 @@ export const dinamycReaderOptions = (
         case "PRODUCTS-PAGE":
             optionToReplace = "Create Products";
         break;
+        case "EDIT-PRODUCTS--PAGE":
+            optionToReplace = "Edit Products";
+        break;
         default:
         return options;
     }

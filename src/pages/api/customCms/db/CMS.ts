@@ -42,7 +42,9 @@ export const CMS: CmsStaticConfig = {
                         name: 'Name',
                         description: 'Description',
                         price: 'Price',
-                        taxes: 'Taxes'
+                        taxes: 'Taxes',
+                        edit: 'Edit',
+                        delete: 'Delete'
                     }
                 },
                 create_order: {
