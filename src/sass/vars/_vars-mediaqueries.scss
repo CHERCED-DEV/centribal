@@ -29,7 +29,7 @@ $bp-tablet-landscape-min: (768px + 1);
 //## desktop
 $bp-desktop: calculateRem($container-max-width);
 $bp-desktop-max: calculateRem($container-max-width - 1);
-$bp-desktop-min: calculateRem(992px + 1);
+$bp-desktop-min: (992px + 1);
 
 
 // + Media queries

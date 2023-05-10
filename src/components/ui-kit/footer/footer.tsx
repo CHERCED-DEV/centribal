@@ -11,9 +11,11 @@ const CopyRigth = lazy(() => import('./utils/sections/copyrigth/CopyRigth'));
 const Footer: React.FC<footerDataProps> = ({ footer }) => {
     return (
         <footer className={styles.footer}>
+            <div className={styles.footerCentribalContainerImg}>
             {
                 footer.centribal && (
                     <Image
+                        className={styles.footerCentribalImg}
                         src={footer.centribal.src}
                         alt={footer.centribal.alt}
                         width={footer.centribal.width}
@@ -21,6 +23,7 @@ const Footer: React.FC<footerDataProps> = ({ footer }) => {
                     />
                 )
             }
+            </div>
             <div className={styles.footerContainer}>
                 <NewsLetter newsletter={footer.newsletter} />
                 <ContactMe contactMe={footer.contactMe} />

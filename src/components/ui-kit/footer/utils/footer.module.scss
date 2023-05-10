@@ -10,30 +10,17 @@
     padding-top: calculateRem(75px)
 }
 
+// newmanBrand
+.footerCentribalContainerImg {
+    @include container-wrap();
+    text-align: center;
+}
+
 .footerContainer {
     @include container-wrap();
 }
 
-// newmanBrand
 
-.footerNewManRm {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footerNewManImg {
-    margin: calculateRem(37px) 0 calculateRem(12px);
-}
-
-.footerNewManDescription {
-    @include font-size($f-size);
-    font-family: $f-subtitle;
-    text-align: center;
-    line-height: 1.8;
-    
-}
 
 // newsletter
 
@@ -56,16 +43,21 @@
 
 .footerNewsLetterInput {
     @include regularInput();
-    max-width: calculateRem(500px);
+    max-width: calculateRem(414px);
     margin-bottom: calculateRem(15px);
 }
 
 .footerNewsLetterSubmit {
-    @include regularButton($w: 220px);
+    @include regularButton($w: 100%);
+    max-width: calculateRem(414px);
 }
 
 //contactMe
-
+.footerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .footerContactMe {
     display: flex;
     flex-direction: column;
@@ -123,12 +115,62 @@
     
 }
 
+//[RESPONSIVE]
+
+@media screen and (min-width: $bp-mobile) {
+    .footerNewsLetterForm {
+        flex-direction: row;
+        position: relative;
+    }
+    .footerContainer {
+        flex-wrap: wrap;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        align-items: flex-start;
+    }
+    .footerNewsLetter {
+        max-width: calculateRem(600px);
+    }
+    .footerContactMe {
+        margin-right: calculateRem(55px);
+    }
+    .footerNewsLetterInput {
+        margin-bottom: 0;
+        padding-left: calculateRem(220px);
+        max-width: 100%;
+    }
+    .footerNewsLetterSubmit {
+        position: absolute;
+        max-width: calculateRem(220px);
+    }
+}
+
+@media screen and (min-width: calculateRem($bp-tablet-landscape-min)) {
+    .footer {
+        width: 100vw;
+        background-color: $uiKit-background;
+    }
+    .footerCopyRigth {
+        max-width: 100vw;
+        background-color:  $c-brand-secundary;
+    }
+}
+
+@media screen and (min-width: calculateRem($container-max-width)) {
+    .footerCentribalContainerImg {
+        text-align: left;
+    }
+    .footerCentribalImg {
+        margin-left: calculateRem(217px);
+    }
+}
+
 
 :export {
     footer: footer;
     footerContainer: footerContainer;
-    footerNewManRm: footerNewManRm;
-    footerNewManImg: footerNewManImg;
+    footerCentribalContainerImg: footerCentribalContainerImg;
+    footerCentribalImg: footerCentribalImg;
     footerNewManDescription: footerNewManDescription;
     footerNewsLetter: footerNewsLetter;
     footerNewsLetterTitle: footerNewsLetterTitle;

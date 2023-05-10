@@ -51,17 +51,23 @@ $parentSize: 16px;
 }
 
 @mixin regularButton($w: 100px, $h: 47px, $fs: 16px, $br: 24px, $ct: $default-text1, $bg: $c-brand-secundary, $fw: $f-weight-bold) {
-    @include font-size($fs);
-    font-family: $f-subtitle;
-    font-weight: $fw;
-    border: calculateRem(1px) solid transparent;
-    background: $bg;
-    padding: 0 calculateRem(20px);
-    width: calculateRem($w);
-    height: calculateRem($h);
-    border-radius: calculateRem($br);
-    text-align: center;
-    text-transform: uppercase;
-    color: $ct;
-    box-shadow: $border-regular;
+  @include font-size($fs);
+  font-family: $f-subtitle;
+  font-weight: $fw;
+  border: calculateRem(1px) solid transparent;
+  background: $bg;
+  padding: 0 calculateRem(20px);
+
+  @if str-index('#{$w}', '%') {
+    width: $w; // Asigna directamente si contiene '%'
+  } @else {
+    width: calculateRem($w); // Usa calculateRem() si no contiene '%'
+  }
+
+  height: calculateRem($h);
+  border-radius: calculateRem($br);
+  text-align: center;
+  text-transform: uppercase;
+  color: $ct;
+  box-shadow: $border-regular;
 }

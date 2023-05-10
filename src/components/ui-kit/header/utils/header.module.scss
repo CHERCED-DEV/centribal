@@ -33,7 +33,7 @@ $height-header: calculateRem(65px);
 @media screen and (min-width: calculateRem($bp-tablet-landscape-min)) {
     .headerContainer {
         width: 100vw;
-        background-color: black;
+        background-color: $uiKit-background;
     }
 }
 
@@ -97,7 +97,7 @@ $height-header: calculateRem(65px);
 }
 
 .floatMenuNavegationLogo {
-    margin-bottom: calculateRem(70px);
+    margin-bottom: calculateRem(100px);
 }
 
 @media #{$tablet-landscape} {
