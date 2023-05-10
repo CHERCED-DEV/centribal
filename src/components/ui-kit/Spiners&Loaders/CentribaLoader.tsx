@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React, { memo } from 'react'
 import Logo from '../../../../public/assets/logos/centribalLoader.svg'
 
-const CentribaLoader = () => {
+export const CentribaLoader = () => {
     return (
         <div className='loader'>
             {
@@ -22,4 +22,4 @@ const CentribaLoader = () => {
     )
 }
 
-export default memo(CentribaLoader);
+ 

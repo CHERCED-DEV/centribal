@@ -1,9 +1,13 @@
 @import "../../../../sass/vars-import";
 
 .footer {
-    background: $c-brand-primary;
+    background: $uiKit-background;
     font-family: $f-subtitle;
     color: $default-text1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: calculateRem(75px)
 }
 
 .footerContainer {
@@ -52,6 +56,7 @@
 
 .footerNewsLetterInput {
     @include regularInput();
+    max-width: calculateRem(500px);
     margin-bottom: calculateRem(15px);
 }
 

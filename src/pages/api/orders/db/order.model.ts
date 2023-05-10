@@ -82,11 +82,11 @@ const orderShema = new Schema(
             unique: false,
             required: [true, "Order number is required"],
         },
-        order: [{
-            type: productSchema,
+        order: {
+            type: [{ type: productSchema }],
             unique: false,
             required: [true, "Order must have at least one product"],
-        }],
+        },        
         delivered: {
             type: Boolean,
             unique: false,

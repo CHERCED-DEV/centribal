@@ -19,16 +19,23 @@ div.HOME-PAGE {
 
 //[Unic Styles]
 // HOME PAGE
-div.HOME-PAGE {
+div.DASHBOARD-PAGE {
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
 }
+
 
 // to wrap the main section class on the pages.
 .main-products,
-.manage-products,
-.main-home {
+.manage-products {
     @include container-wrap;
     @include centerContent;
+}
+
+.main-home  {
+    @include container-wrap;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }

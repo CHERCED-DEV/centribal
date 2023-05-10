@@ -96,7 +96,9 @@ $height-header: calculateRem(65px);
     }
 }
 
-
+.floatMenuNavegationLogo {
+    margin-bottom: calculateRem(70px);
+}
 
 @media #{$tablet-landscape} {
     .floatMenuNavegation {
@@ -107,10 +109,6 @@ $height-header: calculateRem(65px);
 @media screen and (min-width: calculateRem($bp-tablet-landscape-min)) {
     .floatMenuNavegationItem {
         margin: calculateRem(15px);
-    }
-
-    .floatMenuNavegationLogo {
-        margin-bottom: calculateRem(40px);
     }
 }
 

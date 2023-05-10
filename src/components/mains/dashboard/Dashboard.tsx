@@ -1,16 +1,17 @@
-import React, { Suspense, lazy, useState } from 'react';
+import React, { Suspense, lazy, memo, useState } from 'react';
 import Image from 'next/image';
 import { DashBoardDataProps } from './utils/dashboard.interface';
 import { Portal, usePortalProvider } from '@/utils/providers/modalProvider';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import { useGetData } from '@/utils/providers/requests/helpers';
+import { CentribaLoader } from '@/components/ui-kit/Spiners&Loaders/CentribaLoader';
 
-const CentribaLoader = lazy(() => import('@/components/ui-kit/Spiners&Loaders/CentribaLoader'));
-const CreateOrder =lazy(() => import('@/components/mains/dashboard/utils/create-order/CreateOrder'));
-const Inventory =lazy(() => import('@/components/mains/dashboard/utils/inventory/Inventory')); 
-const Orders =lazy(() => import('@/components/mains/dashboard/utils/orders/Orders'));  
 
-export const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
+const CreateOrder = lazy(() => import('@/components/mains/dashboard/utils/create-order/CreateOrder'));
+const Inventory = lazy(() => import('@/components/mains/dashboard/utils/inventory/Inventory'));
+const Orders = lazy(() => import('@/components/mains/dashboard/utils/orders/Orders'));
+
+const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
     const { portalSwitch, setPortalSwitch } = usePortalProvider();
     const [renderPortal, setRenderPortal] = useState<string>("");
 
@@ -52,17 +53,13 @@ export const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
                 <h2 className='portal__title'>{dashboard.portal.title}</h2>
                 <>
                     {portalSwitch ? (
-                            <Suspense fallback={<CentribaLoader />}>
-                                {
-                                    products && (
-                                        <>
-                                            {renderPortal === 'Orders' && <Orders ui_orders={dashboard.portal.components.orders} />}
-                                            {renderPortal === 'Inventory' && <Inventory ui_inventory={dashboard.portal.components.inventory} products={products} />}
-                                            {renderPortal === 'New order' && <CreateOrder create_order={dashboard.portal.components.create_order} products={products} />}
-                                        </>
-                                    )
-                                }
-                            </Suspense>
+                                products && (
+                                    <>
+                                        {renderPortal === 'Orders' && <Orders ui_orders={dashboard.portal.components.orders} />}
+                                        {renderPortal === 'Inventory' && <Inventory ui_inventory={dashboard.portal.components.inventory} products={products} />}
+                                        {renderPortal === 'New order' && <CreateOrder create_order={dashboard.portal.components.create_order} products={products} />}
+                                    </>
+                                )
                     ) : (<>
                         <h3 className='portal__welcome-title'>{dashboard.portal.welcome.label} {new Date().toLocaleDateString('en-US', { weekday: 'long' })}</h3>
                         <Image
@@ -79,3 +76,4 @@ export const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
     );
 };
 
+export default memo(Dashboard);

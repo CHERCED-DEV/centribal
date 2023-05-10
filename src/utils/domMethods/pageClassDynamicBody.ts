@@ -17,7 +17,7 @@ export function pageClassDynamicBody(id: string): {
   // Assign class based on pathname
   const pageClassMap: PageClassMap = {
     "/editProduct/[_id]": "EDIT-PRODUCT--PAGE",
-    "/createProducts": "PRODUCTS-PAGE",
+    "/createProduct": "PRODUCTS-PAGE",
     "/": "DASHBOARD-PAGE",    
   };
 

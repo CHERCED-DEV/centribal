@@ -28,11 +28,9 @@ ordersApi.post("/api/orders", async (req: Request, res: Response) => {
         } else {
             throw new Error("Order does not meet requirements");
         }
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res
-            .status(500)
-            .json({ error: "An error occurred while saving the order" });
+        res.status(500).json({ error: "An error occurred while saving the order", errorMessage: error.message });
     }
 });
 

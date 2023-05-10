@@ -33,7 +33,8 @@ const ContactMe: React.FC<ContactMeDataProps> = ({ contactMe }) => {
                         <li key={media.alt} className={styles.footerContactMeSocialMediaItem}>
                             {
                                 media.src && (
-                                    <Image
+                                    <a href={media.a}>
+                                        <Image
                                         className={styles.footerContactMeSocialMediaImg}
                                         src={media.src}
                                         alt={media.alt}
@@ -41,6 +42,7 @@ const ContactMe: React.FC<ContactMeDataProps> = ({ contactMe }) => {
                                         width={media.width}
                                         height={media.height}
                                     />
+                                    </a>
                                 )
                             }
                         </li>

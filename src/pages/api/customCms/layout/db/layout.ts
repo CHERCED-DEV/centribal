@@ -22,6 +22,12 @@ export const layout: LayoutConfig = {
         },
     },
     footer: {
+        centribal: {
+            src: '/assets/logos/centribalLoader.svg',
+            alt: 'BackTo',
+            width: 110,
+            height: 143,
+        },
         contactMe: {
             channels: [
                 {
@@ -40,21 +46,23 @@ export const layout: LayoutConfig = {
                         width: 30,
                         height: 30,
                     },
-                    label: "servicio@lurdes.co",
+                    label: "servicio@centribal.co",
                 },
             ],
             social_media: [
                 {
-                    src: "/assets/logos/instagramIcon.png",
+                    src: "/assets/logos/linkedInIcon.png",
                     alt: "instagram",
-                    width: 50,
-                    height: 50,
+                    width: 35,
+                    height: 35,
+                    a: "https://www.linkedin.com/company/centribal/"
                 },
                 {
-                    src: "/assets/logos/facebookIcon.png",
+                    src: "/assets/logos/instagramIcon.png",
                     alt: "facebook",
-                    width: 50,
-                    height: 50,
+                    width: 35,
+                    height: 35,
+                    a: "https://www.instagram.com/centribot_oficial/"
                 },
             ],
         },
@@ -68,7 +76,7 @@ export const layout: LayoutConfig = {
         copyRight: {
             terms: "Terms & Conditions | Privacy Policy",
             powered_by:
-                "© Copyright 2020 - 2021 Ingenuity & Solutions LLC All Rights Reserved.",
+                "© Copyright Centribal 2023 LLC All Rights Reserved.",
         },
     },
 };

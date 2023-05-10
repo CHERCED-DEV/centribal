@@ -1,13 +1,14 @@
+import { lazy, useEffect, useState } from 'react';
+import "../sass/styles.scss";
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import { lazy, useEffect, useState } from 'react';
+
 import { PageClasses } from "./api/customCms/db/utils.interface";
 import { pageClassDynamicBody } from '@/utils/domMethods/pageClassDynamicBody';
-import "../sass/styles.scss";
-
-import { PortalContextProvider, usePortalProvider } from '@/utils/providers/modalProvider';
+import { PortalContextProvider } from '@/utils/providers/modalProvider';
 
 const Layout = lazy(() => import("../components/ui-kit/Layout"));
+
 
 export default function App({ Component, pageProps }: AppProps) {
     const router = useRouter();

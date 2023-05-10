@@ -1,8 +1,10 @@
-import { Dashboard } from '@/components/mains/dashboard/Dashboard';
 import Head from 'next/head';
 import { UiStaticData } from './api/customCms/db/utils.interface';
+import { lazy, memo } from 'react';
 
-export default function Home({ CMS }: UiStaticData) {
+const Dashboard = lazy(() => import('@/components/mains/dashboard/Dashboard'))
+
+export default memo(function Home({ CMS }: UiStaticData) {
     return (
         <>
             <Head>
@@ -13,10 +15,9 @@ export default function Home({ CMS }: UiStaticData) {
             {
                 CMS && (<Dashboard dashboard={CMS.dashboard} />)
             }
-
         </>
     )
-}
+})
 
 export const getServerSideProps = async () => {
     try {
@@ -36,4 +37,3 @@ export const getServerSideProps = async () => {
         };
     }
 };
-

@@ -2,7 +2,7 @@ import React, { ReactNode, Suspense, lazy, memo, useCallback, useEffect, useStat
 import { LayoutCmsConfig } from './utils/layout.interface';
 import { usePortalProvider } from '@/utils/providers/modalProvider';
 import { useRouter } from 'next/router';
-
+import { CentribaLoader } from './Spiners&Loaders/CentribaLoader';
 interface LayOutDataProps {
     children: ReactNode | JSX.Element | JSX.Element[];
     pageClass: string;
@@ -10,7 +10,6 @@ interface LayOutDataProps {
 }
 
 const StarterApp = lazy(() => import("./Spiners&Loaders/StarterApp"));
-const CentribaLoader = lazy(() => import("./Spiners&Loaders/CentribaLoader"));
 const Header = lazy(() => import("./header/Header"));
 const Footer = lazy(() => import("./footer/footer"));
 
@@ -49,7 +48,7 @@ const Layout: React.FC<LayOutDataProps> = ({ children, mainClass, pageClass }) =
             sethandleSubMenu(false);
         }
         closeNav();
-    }, [id, sethandleSubMenu]);    
+    }, [id, sethandleSubMenu]);
 
     useEffect(() => {
         const storedValue = window.sessionStorage.getItem('isLoading');
@@ -91,7 +90,9 @@ const Layout: React.FC<LayOutDataProps> = ({ children, mainClass, pageClass }) =
                                 layoutData ? <Header header={layoutData.header} pageClass={pageClass} headerSimple={headerSimple} setHeaderSimple={setHeaderSimple} /> : null
                             }
                             <main className={mainClass}>
-                                {children}
+                                <>
+                                    {children}
+                                </>
                             </main>
                             {
                                 layoutData ? <Footer footer={layoutData.footer} /> : null

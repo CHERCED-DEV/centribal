@@ -3,16 +3,14 @@ import { useForm } from "react-hook-form";
 import { CreateOrderDataProps } from "./create-order.interface";
 import { ProductsConfig } from "@/pages/api/products/db/products.utils";
 import { InputForm } from "./InputForm";
+import { OrdersConfig } from "@/pages/api/orders/db/order.utils";
+import swal from "sweetalert";
 
-type FormValues = { [key: string]: string };
+type FormValues = { [key: string]: unknown };
 
 const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
     const { register, handleSubmit, watch } = useForm<FormValues>();
     const [purchase, setPurchase] = useState<ProductsConfig[]>([]);
-
-    const onSubmit = (data: FormValues) => {
-        console.log("Formulario enviado:", data);
-    };
 
     const handleAddToPurchase = () => {
         const selectedProduct = watch('product');
@@ -36,6 +34,56 @@ const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
     }
 
 
+    const onSubmit = (data: FormValues) => {
+        const randomNumOrder = () => {
+            const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            const result = Array.from({ length: 10 }, () =>
+                characters[Math.floor(Math.random() * characters.length)]
+            ).join('');
+            return result;
+        };
+        const generateRandomBoolean = () => Math.random() < 0.5;
+
+        const newOrder: OrdersConfig = {
+            client: {
+                name: data.Name as string,
+                email: data.Email as string,
+                phone: data.Phone as string,
+            },
+            orderNumber: randomNumOrder(),
+            order: purchase as ProductsConfig[],
+            delivered: generateRandomBoolean(),
+            paid: generateRandomBoolean(),
+            orderValue: data.totalPrice as number,
+            orderValueWithShipping: data.totalOrder as number,
+        };
+        
+        postOrder(newOrder);
+    };
+
+    const postOrder = async (order: OrdersConfig) => {
+        try {
+            const post = await fetch("/api/orders", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(order)
+            });
+            swal({
+                title: "Sent!",
+                text: "Thank your order its send, we will get in touch with you soon.",
+                icon: "success",
+            });
+        } catch (error) {
+            console.error(error);
+            swal({
+                title: "Error",
+                text: "There was an error sending your order. Please try again later.",
+                icon: "error",
+            });
+        }
+    }
+
+
     return (
         <section className="user-form">
             <h3 className="user-form__title">{client.form_title}</h3>
@@ -54,31 +102,27 @@ const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
                             </option>
                         ))}
                     </select>
-                    <button className="user-form__button" onClick={handleAddToPurchase}  >{client.addmore}</button>
+                    <button className="user-form__button" type="button" onClick={handleAddToPurchase}  >{client.addmore}</button>
                 </div>
                 <div className="user-form__sell-resume">
                     <ul>
                         {
-                            purchase?.map((item) => (
-                                <li key={item._id}>
+                            purchase?.map((item, index) => (
+                                <li key={`${item.name}${index}`}>
                                     <span >{item.name}: {item.price}</span>
                                 </li>
                             ))
                         }
                     </ul>
-                    {purchase.map((item, index) => (
-                        <input
-                            key={item._id}
-                            type="hidden"
-                            value={JSON.stringify(item)}
-                            {...register(`purchase[${index}]`)}
-                        />
-                    ))}
-                    <div>
-                        <input type="text" readOnly {...register("totalPrice")} value={totalPrice()} />
-                        <input type="text" readOnly {...register("totalTaxes")} value={totalTaxes()} />
-                        <input type="text" readOnly {...register("totalOrder")} value={totalOrder()} />
-                    </div>
+                    {
+                        totalOrder() > 0 && (
+                            <div>
+                                <input type="number" readOnly {...register("totalPrice")} value={totalPrice()} />
+                                <input type="number" readOnly {...register("totalTaxes")} value={totalTaxes()} />
+                                <input type="text" readOnly {...register("totalOrder")} value={totalOrder()} />
+                            </div>)
+                    }
+
                 </div>
                 <button type="submit">{client.submit}</button>
             </form>
