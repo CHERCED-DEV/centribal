@@ -35,7 +35,16 @@ div.DASHBOARD-PAGE {
 
 .main-home  {
     @include container-wrap;
-    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+@media screen and (min-width:$bp-desktop-min) {
+    .main-home {
+        flex-direction: row;
+        align-items: flex-start;
+    }
 }

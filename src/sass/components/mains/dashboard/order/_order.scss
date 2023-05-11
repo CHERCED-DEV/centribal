@@ -1,0 +1,70 @@
+.user-form {
+    width: 100%;
+    max-width: calculateRem(600px);
+    margin: 0 auto;
+}
+.create-order__title {
+    margin-top: calculateRem(60px);
+}
+.user-form__title {
+    font-size: calculateRem(24px);
+    text-align: center;
+    margin-bottom: calculateRem(20px);
+}
+
+.user-form__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-form__field {
+    margin-bottom: calculateRem(15px);
+}
+
+.user-form__label {
+    font-weight: bold;
+    margin-bottom: calculateRem(5px);
+}
+
+.user-form__input {
+    width: 100%;
+    padding: calculateRem(8px);
+    border: calculateRem(1px) solid #ccc;
+    border-radius: calculateRem(4px);
+    font-size: calculateRem(16px);
+}
+
+.user-form__button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: calculateRem(10px) calculateRem(15px);
+    border-radius: calculateRem(4px);
+    font-size: calculateRem(16px);
+    cursor: pointer;
+}
+
+.user-form__sell-resume {
+    margin-top: calculateRem(20px);
+}
+
+.user-form__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.user-form__item {
+    margin-bottom: calculateRem(5px);
+}
+
+.user-form__item-text {
+    font-size: calculateRem(14px);
+}
+
+.user-form__totals {
+    margin-top: calculateRem(20px);
+}
+.user-form__totals-submit {
+    @include regularButton($w: 220px);
+}

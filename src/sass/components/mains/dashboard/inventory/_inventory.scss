@@ -1,0 +1,40 @@
+.orders-container {
+    margin: 0 auto;
+}
+
+.order-card {
+    background-color: #fff;
+    box-shadow: 0 calculateRem(2px) calculateRem(4px) rgba(0, 0, 0, 0.1);
+    border-radius: calculateRem(8px);
+    padding: calculateRem(16px);
+    margin: calculateRem(16px)0;
+    width: 100%;
+    max-width: calculateRem(600px);
+}
+
+.order-card-separator {
+    border: none;
+    border-top: calculateRem(1px) solid #ccc;
+    margin: calculateRem(16px) 0;
+}
+
+.order-card-content {
+    margin-bottom: calculateRem(16px);
+}
+
+.order-card-article {
+    margin-bottom: calculateRem(16px);
+}
+
+.order-card-details {
+    margin-top: calculateRem(16px);
+}
+
+.order-card p {
+    color: #000;
+    margin-bottom: calculateRem(8px);
+}
+
+.order-card-article-header {
+    font-weight: bold;
+}

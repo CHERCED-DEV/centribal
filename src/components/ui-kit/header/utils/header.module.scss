@@ -14,12 +14,6 @@ $height-header: calculateRem(65px);
     background-color: $uiKit-background;
 }
 
-.headerImg {
-    display: flex;
-    align-items: flex-end;
-    margin-left: calculateRem(-8px);
-}
-
 .headerNavegation {
     display: none;
 }

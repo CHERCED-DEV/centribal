@@ -16,10 +16,10 @@ export const CMS: CmsStaticConfig = {
             title: "Manage your business",
             welcome: {
                 img: {
-                    src: "",
-                    alt: "",
-                    width: 0,
-                    height: 0,
+                    src: "/assets/imgs/omni.svg",
+                    alt: "manage your bussines",
+                    width: 128,
+                    height: 128,
                 },
                 label: "Happy",
             },

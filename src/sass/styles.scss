@@ -5,16 +5,26 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
-    
+
 }
 
-ul,ol {
+ul,
+ol {
     list-style: none;
 }
 
 body {
-    background-color: $c-memories-bg-b;
+    background-color: $c-dashboard-bg-b;
     overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $c-brand-primary;
 }
 
 h1,
@@ -27,6 +37,9 @@ a,
 p {
     font-family: $f-body;
     line-height: 1.2;
+}
+.table__cell {
+    font-family: $f-subtitle;
 }
 
 .menu-mobile {

@@ -57,7 +57,7 @@ const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
             orderValue: data.totalPrice as number,
             orderValueWithShipping: data.totalOrder as number,
         };
-        
+
         postOrder(newOrder);
     };
 
@@ -88,43 +88,40 @@ const OrderForm: React.FC<CreateOrderDataProps> = ({ client, products }) => {
         <section className="user-form">
             <h3 className="user-form__title">{client.form_title}</h3>
             <form className="user-form__form" onSubmit={handleSubmit(onSubmit)}>
-                {
-                    client.fields.map((item) => (
-                        <InputForm key={item.value} field={item} register={register} />
-                    ))
-                }
+                {client.fields.map((item) => (
+                    <InputForm key={item.value} field={item} register={register} />
+                ))}
                 <div className="user-form__field">
                     <label className="user-form__label">{client.product.title}</label>
                     <select className="user-form__input" {...register("product")}>
-                        {products && products.map((product) => (
-                            <option key={product._id} value={product._id}>
-                                {product.name} - ${product.price}
-                            </option>
-                        ))}
+                        {products &&
+                            products.map((product) => (
+                                <option key={product._id} value={product._id}>
+                                    {product.name} - ${product.price}
+                                </option>
+                            ))}
                     </select>
-                    <button className="user-form__button" type="button" onClick={handleAddToPurchase}  >{client.addmore}</button>
+                    <button className="user-form__button" type="button" onClick={handleAddToPurchase}>
+                        {client.addmore}
+                    </button>
                 </div>
                 <div className="user-form__sell-resume">
-                    <ul>
-                        {
-                            purchase?.map((item, index) => (
-                                <li key={`${item.name}${index}`}>
-                                    <span >{item.name}: {item.price}</span>
-                                </li>
-                            ))
-                        }
+                    <ul className="user-form__list">
+                        {purchase?.map((item, index) => (
+                            <li className="user-form__item" key={`${item.name}${index}`}>
+                                <span className="user-form__item-text">{item.name}: {item.price}</span>
+                            </li>
+                        ))}
                     </ul>
-                    {
-                        totalOrder() > 0 && (
-                            <div>
-                                <input type="number" readOnly {...register("totalPrice")} value={totalPrice()} />
-                                <input type="number" readOnly {...register("totalTaxes")} value={totalTaxes()} />
-                                <input type="text" readOnly {...register("totalOrder")} value={totalOrder()} />
-                            </div>)
-                    }
-
+                    {totalOrder() > 0 && (
+                        <div className="user-form__totals">
+                            <input className="user-form__input" type="number" readOnly {...register("totalPrice")} value={totalPrice()} />
+                            <input className="user-form__input" type="number" readOnly {...register("totalTaxes")} value={totalTaxes()} />
+                            <input className="user-form__input" type="number"  readOnly {...register("totalOrder")} value={totalOrder()} />
+                        </div>
+                    )}
                 </div>
-                <button type="submit">{client.submit}</button>
+                <button className="user-form__totals-submit" type="submit">{client.submit}</button>
             </form>
         </section>
     );
