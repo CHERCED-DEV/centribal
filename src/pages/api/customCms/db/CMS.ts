@@ -49,56 +49,70 @@ export const CMS: CmsStaticConfig = {
                 },
                 create_order: {
                     title: "Create Order",
-                    form_title: "Order Form",
-                    fields: [
-                        {
-                            value: "Name",
-                            required: true,
+                    general_form: {
+                        form_title: "Order Form",
+                        fields: [
+                            {
+                                value: "Name",
+                                required: true,
+                                type:"text"
+                            },
+                            {
+                                value: "Email",
+                                required: true,
+                                type:"text"
+                            },
+                            {
+                                value: "Phone",
+                                required: true,
+                                type:"number"
+                            },
+                        ],
+                        product: {
+                            title: "Products",
+                            resume: "Order Resume",
                         },
-                        {
-                            value: "Email",
-                            required: true,
-                        },
-                        {
-                            value: "Phone",
-                            required: true,
-                        },
-                    ],
-                    product: {
-                        title: "Products",
-                        resume: "Order Resume",
+                        addmore: "Add",
+                        submit: "Submit",
                     },
-                    addmore: "Add",
-                    submit: "Submit",
+                    method: 'POST'                   
                 },
             },
         },
     },
     create_products: {
         title: "Create Product",
-        form_title: "Products Form",
-        fields: [
-            {
-                value: "reference",
-                required: true,
-            },
-            {
-                value: "name",
-                required: true,
-            },
-            {
-                value: "description",
-                required: true,
-            },
-            {
-                value: "price",
-                required: true,
-            },
-            {
-                value: "taxes",
-                required: true,
-            },
-        ],
-        submit: "Send"
+        general_form: {
+            form_title: "Products Form",
+            fields: [
+                {
+                    value: "reference",
+                    required: true,
+                    type:"text"
+                },
+                {
+                    value: "name",
+                    required: true,
+                    type:"text"
+                },
+                {
+                    value: "description",
+                    required: true,
+                    type:"text"
+                },
+                {
+                    value: "price",
+                    required: true,
+                    type:"number"
+                },
+                {
+                    value: "taxes",
+                    required: true,
+                    type:"number"
+                },
+            ],
+            submit: "Send"
+        },
+        method: 'POST'
     },
 };

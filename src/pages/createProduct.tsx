@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import Head from 'next/head';
 import { UiStaticData } from './api/customCms/db/utils.interface';
-import CreateProduct from '@/components/mains/dashboard/create-product/CreateProduct';
+import FormContainer from '@/components/common/forms/FormContainer';
 
 export default memo(function Products({ CMS }: UiStaticData) {
     return (
@@ -12,7 +12,7 @@ export default memo(function Products({ CMS }: UiStaticData) {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             {
-                CMS.create_products && (<CreateProduct create_products={CMS.create_products} />)
+                CMS.create_products && (<FormContainer forms={CMS.create_products} />)
             }
         </>
     )

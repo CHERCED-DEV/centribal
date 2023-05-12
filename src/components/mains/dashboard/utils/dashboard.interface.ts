@@ -1,7 +1,7 @@
 import { ImgConfig } from "@/pages/api/customCms/db/utils.interface";
-import { CreateOrderConfig } from "./create-order/util/create-order.interface";
 import { UIOrdersConfig } from "./orders/util/orders.interface";
 import { UiInventoryConfig } from "./inventory/utils/inventory.interface";
+import { FromsConfig } from "@/components/common/forms/utils/general-forms.utils";
 
 export interface DashBoardConfig {
     aside: {
@@ -18,7 +18,7 @@ export interface DashBoardConfig {
         components: {
             orders: UIOrdersConfig;
             inventory: UiInventoryConfig;
-            create_order: CreateOrderConfig;
+            create_order: FromsConfig;
         }
     }
 }

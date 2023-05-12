@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { FormValues, GeneralFormsDataProps, handleAddToPurchase, totalOrder, totalPrice, totalTaxes } from './general-forms.utils'
+import React, { memo, useState } from 'react'
+import { FormValues, GeneralFormsDataProps, totalOrder, totalPrice, totalTaxes } from './general-forms.utils'
 import { GenericInput } from './GenericInput'
 import { useForm } from 'react-hook-form';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
@@ -10,8 +10,19 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
     const { register, handleSubmit, watch } = useForm<FormValues>();
     const [purchase, setPurchase] = useState<ProductsConfig[]>([]);
 
+    const handleAddToPurchase = () => {
+        const selectedProduct = watch("product");
+        const productToAdd = products?.find(
+            (product) => product._id === selectedProduct
+        );
+        if (productToAdd) {
+            setPurchase((prevPurchase) => [...prevPurchase, productToAdd]);
+        }
+    };
+
     const onSubmit = async (data: any) => {
         const petitionType = method;
+        console.log(data)
         try {
             if (petitionType === 'PUT') {
                 const uri: string = "/api/products";
@@ -71,7 +82,7 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                 products ? (
                                     <>
                                         <div className="user-form__field">
-                                            <label className="user-form__label">{client.product.title}</label>
+                                            <label className="user-form__label">{data_forms.product?.title}</label>
                                             <select className="user-form__input" {...register("product")}>
                                                 {products &&
                                                     products.map((product) => (
@@ -80,8 +91,8 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                                         </option>
                                                     ))}
                                             </select>
-                                            <button className="user-form__button" type="button" onClick={() => handleAddToPurchase(watch,products,setPurchase)}>
-                                                {client.addmore}
+                                            <button className="user-form__button" type="button" onClick={() => handleAddToPurchase()}>
+                                                {data_forms.addmore}
                                             </button>
                                         </div>
                                         <div className="user-form__sell-resume">
@@ -112,4 +123,4 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
     )
 }
 
-export default GeneralForm;
+export default memo(GeneralForm);

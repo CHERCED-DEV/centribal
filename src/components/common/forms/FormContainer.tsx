@@ -1,11 +1,15 @@
-import React, { memo } from 'react'
+import React, { lazy, memo } from 'react'
+import { FormsDataProps } from './utils/general-forms.utils';
 
-const FormContainer = () => {
+
+const GeneralForm = lazy(() => import('./utils/GeneralForm'));
+
+const FormContainer: React.FC<FormsDataProps> = ({forms, products}) => {
     return (
         <div className="general-form">
-            <h2 className="general-form__title">{create_order.title}</h2>
+            <h2 className="general-form__title">{forms.title}</h2>
             <div className="general-form__content">
-                <OrderForm client={create_order} products={products} />
+                <GeneralForm data_forms={forms.general_form} products={products} method={forms.method} />
             </div>
         </div>
     )
