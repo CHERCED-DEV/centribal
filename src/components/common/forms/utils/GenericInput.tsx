@@ -1,18 +1,16 @@
-import React from 'react';
-import { CustomInputForm } from './create-order.interface';
+import React from 'react'
+import { CustomInputForm } from './general-forms.utils';
 
-
-export const InputForm: React.FC<CustomInputForm> = ({ field, register }) => {
-
+export const GenericInput: React.FC<CustomInputForm> = ({ field, register, type }) => {
     return (
         <div className="user-form__field">
             <input
                 className="user-form__input"
-                type="text"
+                type={type}
                 required={field.required}
                 {...register(field.value)}
                 defaultValue={field.value}
             />
         </div>
-    );
-};
+    )
+}

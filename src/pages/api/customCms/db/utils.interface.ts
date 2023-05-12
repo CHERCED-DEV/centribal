@@ -1,3 +1,4 @@
+import { CreateProductConfig } from "@/components/mains/dashboard/create-product/utils/create-product.interface";
 import { DashBoardConfig } from "@/components/mains/dashboard/utils/dashboard.interface";
 
 export interface ImgConfig {
@@ -27,6 +28,7 @@ export interface ContextProviderProps {
 }
 export interface CmsStaticConfig {
     dashboard: DashBoardConfig;
+    create_products: CreateProductConfig;
 }
 
 export interface UiStaticData {

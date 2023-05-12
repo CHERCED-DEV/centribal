@@ -28,7 +28,7 @@ export const CMS: CmsStaticConfig = {
                     client: "Client",
                     num_order: "Order Number",
                     name_article: {
-                        title: "Article Name",
+                        title: "Summary:",
                         art: "Article",
                     },
                     delivered: "Delivered",
@@ -38,40 +38,67 @@ export const CMS: CmsStaticConfig = {
                 },
                 inventory: {
                     th: {
-                        reference: 'Reference',
-                        name: 'Name',
-                        description: 'Description',
-                        price: 'Price',
-                        taxes: 'Taxes',
-                        edit: 'Edit',
-                        delete: 'Delete'
-                    }
+                        reference: "Reference",
+                        name: "Name",
+                        description: "Description",
+                        price: "Price",
+                        taxes: "Taxes",
+                        edit: "Edit",
+                        delete: "Delete",
+                    },
                 },
                 create_order: {
                     title: "Create Order",
-                    form_title: "Order Form",             
-                    fields:[
+                    form_title: "Order Form",
+                    fields: [
                         {
                             value: "Name",
-                            required: true
+                            required: true,
                         },
                         {
                             value: "Email",
-                            required: true
+                            required: true,
                         },
                         {
                             value: "Phone",
-                            required: true
+                            required: true,
                         },
                     ],
                     product: {
                         title: "Products",
-                        resume: "Order Resume"
+                        resume: "Order Resume",
                     },
                     addmore: "Add",
                     submit: "Submit",
-                }
+                },
             },
         },
+    },
+    create_products: {
+        title: "Create Product",
+        form_title: "Products Form",
+        fields: [
+            {
+                value: "reference",
+                required: true,
+            },
+            {
+                value: "name",
+                required: true,
+            },
+            {
+                value: "description",
+                required: true,
+            },
+            {
+                value: "price",
+                required: true,
+            },
+            {
+                value: "taxes",
+                required: true,
+            },
+        ],
+        submit: "Send"
     },
 };
