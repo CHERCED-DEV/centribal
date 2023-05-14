@@ -56,7 +56,7 @@ const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
                             <>
                                 {renderPortal === 'Orders' && <Orders ui_orders={dashboard.portal.components.orders} />}
                                 {renderPortal === 'Inventory' && <Inventory ui_inventory={dashboard.portal.components.inventory} products={products} />}
-                                {renderPortal === 'New order' && <FormContainer forms={dashboard.portal.components.create_order} products={products} />}
+                                {renderPortal === 'New order' && <FormContainer forms={dashboard.portal.components.create_order} />}
                             </>
                         )
                     ) : (<>

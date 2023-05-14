@@ -29,6 +29,7 @@ export interface ContextProviderProps {
 export interface CmsStaticConfig {
     dashboard: DashBoardConfig;
     create_products: FromsConfig;
+    edit_products: FromsConfig;
 }
 
 export interface UiStaticData {

@@ -1,9 +1,11 @@
-import { memo } from 'react';
+import { lazy, memo } from 'react';
 import Head from 'next/head';
 import { UiStaticData } from './api/customCms/db/utils.interface';
-import FormContainer from '@/components/common/forms/FormContainer';
+
+const FormContainer = lazy(() => import('@/components/common/forms/FormContainer'));
 
 export default memo(function Products({ CMS }: UiStaticData) {
+
     return (
         <>
             <Head>

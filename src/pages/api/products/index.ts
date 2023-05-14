@@ -15,7 +15,6 @@ productsApi.get("/api/products", async (req: Request, res: Response) => {
     res.status(200).json(products);
 });
 
-
 productsApi.post("/api/products", async (req: Request, res: Response) => {
     try {
         const incommingReq = req.body;
@@ -28,11 +27,12 @@ productsApi.post("/api/products", async (req: Request, res: Response) => {
         } else {
             throw new Error("Product does not meet requirements");
         }
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res
-            .status(500)
-            .json({ error: "An error occurred while saving the product" });
+        res.status(500).json({
+            error: "An error occurred while saving the product",
+            errorMessage: error.message,
+        });
     }
 });
 
@@ -59,15 +59,18 @@ productsApi.put("/api/products", async (req: Request, res: Response) => {
         if (taxes) {
             productToUpdate.taxes = taxes;
         }
-
-        await productToUpdate.save();
-
-        res.status(200).json({ success: "the product was updated successfully" });
-    } catch (error) {
+        if (productHasAllKeys(incommingReq)) {
+            await productToUpdate.save();
+            res.status(200).json({ success: "the product was updated successfully" });
+        } else {
+            throw new Error("Product does not meet requirements");
+        }
+    } catch (error: any) {
         console.error(error);
-        res
-            .status(500)
-            .json({ error: "An error occurred while updating the product" });
+        res.status(500).json({
+            error: "An error occurred while saving the order",
+            errorMessage: error.message,
+        });
     }
 });
 
@@ -85,6 +88,5 @@ productsApi.delete("/api/products", async (req: Request, res: Response) => {
 });
 
 productsApi.use(cors({ origin: process.env.VERCEL_URL_CORS }));
-
 
 export default productsApi;

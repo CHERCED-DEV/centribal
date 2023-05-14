@@ -115,4 +115,12 @@ export const CMS: CmsStaticConfig = {
         },
         method: 'POST'
     },
+    edit_products:  {
+        title: "Edit Product",
+        general_form: {
+            form_title: "Products Form",
+            submit: "Send"
+        },
+        method: 'PUT'
+    },
 };

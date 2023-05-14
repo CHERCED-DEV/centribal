@@ -1,7 +1,9 @@
+import { CmsStaticConfig } from "@/pages/api/customCms/db/utils.interface";
 import { ProductsConfig } from "@/pages/api/products/db/products.utils";
 
 export interface EditProductDataProps {
-    product: ProductsConfig
+    product: ProductsConfig;
+    CMS: CmsStaticConfig;
 }
 
 export const getProductById = async (id: string) => {

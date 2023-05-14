@@ -15,7 +15,6 @@ ordersApi.get("/api/orders", async (req: Request, res: Response) => {
     res.status(200).json(orders);
 });
 
-
 ordersApi.post("/api/orders", async (req: Request, res: Response) => {
     try {
         const incomingReq = req.body;
@@ -30,7 +29,12 @@ ordersApi.post("/api/orders", async (req: Request, res: Response) => {
         }
     } catch (error: any) {
         console.error(error);
-        res.status(500).json({ error: "An error occurred while saving the order", errorMessage: error.message });
+        res
+            .status(500)
+            .json({
+                error: "An error occurred while saving the order",
+                errorMessage: error.message,
+            });
     }
 });
 
@@ -38,7 +42,15 @@ ordersApi.put("/api/orders", async (req: Request, res: Response) => {
     try {
         const orderId = req.body._id;
         const incomingReq = req.body;
-        const { client, orderNumber, order, delivered, paid, orderValue, orderValueWithShipping } = incomingReq;
+        const {
+            client,
+            orderNumber,
+            order,
+            delivered,
+            paid,
+            orderValue,
+            orderValueWithShipping,
+        } = incomingReq;
 
         const orderToUpdate = await Order.findById(orderId);
 
@@ -63,15 +75,20 @@ ordersApi.put("/api/orders", async (req: Request, res: Response) => {
         if (orderValueWithShipping) {
             orderToUpdate.orderValueWithShipping = orderValueWithShipping;
         }
-
-        await orderToUpdate.save();
-
-        res.status(200).json({ success: "The order was updated successfully" });
-    } catch (error) {
+        if (productHasAllKeys(incomingReq)) {
+            await orderToUpdate.save();
+            res.status(200).json({ success: "The order was updated successfully" });
+        } else {
+            throw new Error("Order does not meet requirements");
+        }        
+    } catch (error: any) {
         console.error(error);
         res
             .status(500)
-            .json({ error: "An error occurred while updating the order" });
+            .json({
+                error: "An error occurred while saving the order",
+                errorMessage: error.message,
+            });
     }
 });
 
@@ -90,6 +107,4 @@ ordersApi.delete("/api/orders", async (req: Request, res: Response) => {
 
 ordersApi.use(cors({ origin: process.env.VERCEL_URL_CORS }));
 
-
 export default ordersApi;
-

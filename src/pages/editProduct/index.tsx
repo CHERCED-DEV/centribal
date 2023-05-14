@@ -1,10 +1,10 @@
 import Inventory from '@/components/mains/dashboard/utils/inventory/Inventory'
-import React from 'react'
+import React, { memo } from 'react'
 import { ProductsConfig } from '../api/products/db/products.utils';
 import { useGetData } from '@/utils/providers/requests/helpers';
 import { CmsStaticConfig } from '../api/customCms/db/utils.interface';
 
-export default function EditProduct() {
+export default memo(function EditProduct() {
     const products = useGetData<ProductsConfig[]>("api/products", "products");
     const ui_products = useGetData<CmsStaticConfig>("api/customCms", "dashboard");
     return (
@@ -14,4 +14,4 @@ export default function EditProduct() {
             }
         </div>
     )
-}
+})
