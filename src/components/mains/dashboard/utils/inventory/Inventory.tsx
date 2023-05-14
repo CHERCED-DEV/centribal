@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { useState, memo } from 'react';
 import { InventoryDataProps, deleteProduct } from './utils/inventory.interface';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import Image from 'next/image';
@@ -73,7 +73,7 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
     const optionProduct = (_id: string, option: string) => {
         if (option === "delete") {
             return (
-                <button className='' onClick={() => deleteProduct(_id)}>
+                <button className='' onClick={() => deleteProduct(_id, router)}>
                     <Image
                         className=''
                         src={"/assets/logos/delete.svg"}

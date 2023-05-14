@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import { OrdersConfig } from '@/pages/api/orders/db/order.utils';
 import { UseActionData, useGetData } from '@/utils/providers/requests/helpers';
+import { useRouter } from 'next/router';
 
 const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, product }) => {
     // State and form handling logic
@@ -12,6 +13,7 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
     const [purchase, setPurchase] = useState<ProductsConfig[]>([]);
     const [reference, setReference] = useState<ProductsConfig[]>([])
     const [productsByName, setProductsByName] = useState<ProductsConfig[]>([])
+    const router = useRouter()
 
     const products = useGetData<ProductsConfig[]>("/api/products", "products");
 
@@ -37,6 +39,8 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                 const updatedFields: Partial<ProductsConfig> = {
                     _id: _id
                 };
+                const castPrice: number = validateAsNumber(data.price);
+                const castTaxes: number = validateAsNumber(data.taxes);
                 if (data.reference !== undefined && data.reference !== reference) {
                     if (data.reference !== null && typeof data.reference === "string") {
                         updatedFields.reference = data.reference;
@@ -61,23 +65,26 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                     updatedFields.description = description;
                 }
 
-                if (data.price !== undefined && data.price !== price) {
-                    if (data.price !== null && typeof data.price === "number") {
-                        updatedFields.price = validateAsNumber(data.price);
+                if (castPrice !== undefined && castPrice !== price) {
+                    if (castPrice !== null && typeof castPrice === "number") {
+                        updatedFields.price = castPrice;
                     }
                 } else {
                     updatedFields.price = price;
                 }
 
-                if (data.taxes !== undefined && data.taxes !== taxes) {
-                    if (data.taxes !== null && typeof data.taxes === "number") {
-                        updatedFields.taxes = validateAsNumber(data.taxes);
+                if (castTaxes !== undefined && castTaxes !== taxes) {
+                    if (castTaxes !== null && typeof castTaxes === "number") {
+                        updatedFields.taxes = castTaxes;
                     }
                 } else {
                     updatedFields.taxes = taxes;
                 }
                 const uri: string = "/api/products";
-                await UseActionData(uri, petitionType, updatedFields);
+                const res = await UseActionData(uri, petitionType, updatedFields);
+                if(res === true){
+                    router.push("/editProduct")
+                }
             } else {
                 if ('description' in data) {
                     const newProduct: ProductsConfig = {
