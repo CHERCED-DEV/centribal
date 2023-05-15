@@ -38,3 +38,9 @@
 .order-card-article-header {
     font-weight: bold;
 }
+
+@media screen and (max-width:$bp-mobile) {
+    .table__cell-d {
+        display: none;
+    }
+}

@@ -111,19 +111,19 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory }) => {
         <table className="table">
             <thead>
                 <tr className="table__row">
-                    <th className="table__cell" onClick={() => sortInventory('reference')}>
+                    <th className="table__cell-r" onClick={() => sortInventory('reference')}>
                         {ui_inventory.th.reference} {sortKey === 'reference' && sortOrder === 'asc' ? '▲' : '▼'}
                     </th>
-                    <th className="table__cell" onClick={() => sortInventory('name')}>
+                    <th className="table__cell-n" onClick={() => sortInventory('name')}>
                         {ui_inventory.th.name} {sortKey === 'name' && sortOrder === 'asc' ? '▲' : '▼'}
                     </th>
-                    <th className="table__cell" >
+                    <th className="table__cell-d" >
                         {ui_inventory.th.description}
                     </th>
-                    <th className="table__cell" onClick={() => sortInventory('price')}>
+                    <th className="table__cell-p" onClick={() => sortInventory('price')}>
                         {ui_inventory.th.price} {sortKey === 'price' && sortOrder === 'asc' ? '▲' : '▼'}
                     </th>
-                    <th className="table__cell" onClick={() => sortInventory('taxes')}>
+                    <th className="table__cell-t" onClick={() => sortInventory('taxes')}>
                         {ui_inventory.th.taxes} {sortKey === 'taxes' && sortOrder === 'asc' ? '▲' : '▼'}
                     </th>
                     {router.asPath !== "/" && (
@@ -141,11 +141,11 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory }) => {
             <tbody>
                 {sortedProducts?.map((product) => (
                     <tr className="table__row" key={product._id}>
-                        <td className="table__cell">{product.reference}</td>
-                        <td className="table__cell">{product.name}</td>
-                        <td className="table__cell">{product.description}</td>
-                        <td className="table__cell">{product.price}</td>
-                        <td className="table__cell">{product.taxes}</td>
+                        <td className="table__cell-r">{product.reference}</td>
+                        <td className="table__cell-n">{product.name}</td>
+                        <td className="table__cell-d">{product.description}</td>
+                        <td className="table__cell-p">{product.price}</td>
+                        <td className="table__cell-t">{product.taxes}</td>
                         {router.asPath !== "/" && (
                             <>
                                 <td className="table__cell">{product?._id && optionProduct(product._id, "edit")}</td>

@@ -16,9 +16,7 @@ export const deleteProduct = async (_id: string, router:NextRouter) => {
                 icon: "success",
             });
             console.log(deleteProductData.success); // Mensaje de éxito
-            setTimeout(() => {
-                router.push(router.asPath); 
-            }, 1500);
+            router.reload(); 
         } else {
             swal({
                 title: "Error",
