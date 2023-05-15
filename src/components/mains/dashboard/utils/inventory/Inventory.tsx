@@ -3,11 +3,11 @@ import { InventoryDataProps, deleteProduct } from './utils/inventory.interface';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { UseGetData } from '@/utils/providers/requests/helpers';
+import { GetData } from '@/utils/providers/requests/helpers';
 
 
 const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory }) => {
-    const products = UseGetData<ProductsConfig[]>("api/products", "products");
+    const products = GetData<ProductsConfig[]>("/api/products", "products");
     const [sortKey, setSortKey] = useState<keyof ProductsConfig>('name');
     const [sortOrder, setSortOrder] = useState('');
     const [sortedProducts, setSortedProducts] = useState<ProductsConfig[]>(products || []);

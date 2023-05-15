@@ -4,7 +4,7 @@ import { GenericInput } from './GenericInput'
 import { useForm } from 'react-hook-form';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import { OrdersConfig } from '@/pages/api/orders/db/order.utils';
-import { UseActionData, UseGetData } from '@/utils/providers/requests/helpers';
+import { UseActionData, GetData } from '@/utils/providers/requests/helpers';
 import { useRouter } from 'next/router';
 
 const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, product }) => {
@@ -15,7 +15,7 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
     const [productsByName, setProductsByName] = useState<ProductsConfig[]>([])
     const router = useRouter()
 
-    const products = UseGetData<ProductsConfig[]>("/api/products", "products");
+    const products = GetData<ProductsConfig[]>("/api/products", "products");
 
     useEffect(() => {
         let mount = true;

@@ -1,9 +1,15 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { lazy } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { getProductById, EditProductDataProps } from './utils/edit-product.uils';
-import FormContainer from '@/components/common/forms/FormContainer';
+import { ProductsConfig } from '../api/products/db/products.utils';
+import { CmsStaticConfig } from '../api/customCms/db/utils.interface';
 
+interface EditProductDataProps {
+    product: ProductsConfig;
+    CMS: CmsStaticConfig;
+}
+
+const FormContainer = lazy(()=>import('@/components/common/forms/FormContainer'))
 
 export default function EditProductById({ CMS, product }: EditProductDataProps) {
     return (
@@ -19,6 +25,17 @@ export default function EditProductById({ CMS, product }: EditProductDataProps) 
         </>
     )
 }
+
+const getProductById = async (id: string) => {
+    try {
+        const res = await fetch(`${process.env.VERCEL_URL_CORS}/api/products`);
+        const data = await res.json();
+        const project = data.find((unit: ProductsConfig) => unit._id === id);
+        return project;
+    } catch (error: any) {
+        return { errorMessage: error.message };
+    }
+};
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const { query } = context;

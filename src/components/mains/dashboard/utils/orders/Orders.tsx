@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import { OrdersConfig } from '@/pages/api/orders/db/order.utils';
 import { UIOrdersDataProps } from './util/orders.interface';
-import { UseGetData } from '@/utils/providers/requests/helpers';
+import { GetData } from '@/utils/providers/requests/helpers';
 
 const Orders: React.FC<UIOrdersDataProps> = ({ ui_orders }) => {
-    const orders = UseGetData<OrdersConfig[]>("api/orders", "orders");
+    const orders = GetData<OrdersConfig[]>("/api/orders", "orders");
 
     return (
         <>
