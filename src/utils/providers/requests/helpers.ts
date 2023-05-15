@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
 
-export function useGetData<T>(uri: string, dataKey: string): T | null {
+export function UseGetData<T>(uri: string, dataKey: string): T | null {
     const [data, setData] = useState<{ [key: string]: T | null }>({});
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,7 +25,7 @@ export function useGetData<T>(uri: string, dataKey: string): T | null {
         };
 
         fetchData();
-    }, [uri, dataKey]);
+    }, [uri, dataKey, router.asPath]);
 
     return data[dataKey] || null;
 }

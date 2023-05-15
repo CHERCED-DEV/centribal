@@ -1,4 +1,3 @@
-import { ProductsConfig } from "@/pages/api/products/db/products.utils";
 import { NextRouter } from "next/router";
 import swal from "sweetalert";
 
@@ -46,5 +45,4 @@ export interface UiInventoryConfig {
 }
 export interface InventoryDataProps {
     ui_inventory: UiInventoryConfig;
-    products: ProductsConfig[];
 }

@@ -1,15 +1,23 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { InventoryDataProps, deleteProduct } from './utils/inventory.interface';
 import { ProductsConfig } from '@/pages/api/products/db/products.utils';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { UseGetData } from '@/utils/providers/requests/helpers';
 
 
-const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => {
+const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory }) => {
+    const products = UseGetData<ProductsConfig[]>("api/products", "products");
     const [sortKey, setSortKey] = useState<keyof ProductsConfig>('name');
     const [sortOrder, setSortOrder] = useState('');
-    const [sortedProducts, setSortedProducts] = useState(products);
+    const [sortedProducts, setSortedProducts] = useState<ProductsConfig[]>(products || []);
     const router = useRouter();
+
+    useEffect(() => {
+        if (products) {
+            setSortedProducts(products);
+        }
+    }, [products]);
 
     const sortInventory = (key: keyof ProductsConfig) => {
         if (sortKey === key) {
@@ -131,7 +139,7 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
                 </tr>
             </thead>
             <tbody>
-                {sortedProducts.map((product) => (
+                {sortedProducts?.map((product) => (
                     <tr className="table__row" key={product._id}>
                         <td className="table__cell">{product.reference}</td>
                         <td className="table__cell">{product.name}</td>
@@ -140,8 +148,8 @@ const Inventory: React.FC<InventoryDataProps> = ({ ui_inventory, products }) => 
                         <td className="table__cell">{product.taxes}</td>
                         {router.asPath !== "/" && (
                             <>
-                            <td className="table__cell">{product?._id && optionProduct(product._id, "edit")}</td>
-                            <td className="table__cell">{product?._id && optionProduct(product._id, "delete")}</td>
+                                <td className="table__cell">{product?._id && optionProduct(product._id, "edit")}</td>
+                                <td className="table__cell">{product?._id && optionProduct(product._id, "delete")}</td>
                             </>
                         )}
                     </tr>

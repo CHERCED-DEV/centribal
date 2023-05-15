@@ -2,8 +2,6 @@ import React, { lazy, memo, useState } from 'react';
 import Image from 'next/image';
 import { DashBoardDataProps } from './utils/dashboard.interface';
 import { usePortalProvider } from '@/utils/providers/modalProvider';
-import { ProductsConfig } from '@/pages/api/products/db/products.utils';
-import { useGetData } from '@/utils/providers/requests/helpers';
 
 
 const FormContainer = lazy(() => import('@/components/common/forms/FormContainer'));
@@ -13,8 +11,6 @@ const Orders = lazy(() => import('@/components/mains/dashboard/utils/orders/Orde
 const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
     const { portalSwitch, setPortalSwitch } = usePortalProvider();
     const [renderPortal, setRenderPortal] = useState<string>("");
-
-    const products = useGetData<ProductsConfig[]>("api/products", "products");
 
     const handlePortal = (option: string) => {
         if (portalSwitch === false) {
@@ -52,13 +48,11 @@ const Dashboard: React.FC<DashBoardDataProps> = ({ dashboard }) => {
                 <h2 className='portal__title'>{dashboard.portal.title}</h2>
                 <>
                     {portalSwitch ? (
-                        products && (
                             <>
                                 {renderPortal === 'Orders' && <Orders ui_orders={dashboard.portal.components.orders} />}
-                                {renderPortal === 'Inventory' && <Inventory ui_inventory={dashboard.portal.components.inventory} products={products} />}
+                                {renderPortal === 'Inventory' && <Inventory ui_inventory={dashboard.portal.components.inventory} />}
                                 {renderPortal === 'New order' && <FormContainer forms={dashboard.portal.components.create_order} />}
                             </>
-                        )
                     ) : (<>
                         <h3 className='portal__welcome-title'>{dashboard.portal.welcome.label} {new Date().toLocaleDateString('en-US', { weekday: 'long' })}</h3>
                         <Image

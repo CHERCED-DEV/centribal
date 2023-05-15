@@ -1,17 +1,34 @@
 import Inventory from '@/components/mains/dashboard/utils/inventory/Inventory'
 import React, { memo } from 'react'
-import { ProductsConfig } from '../api/products/db/products.utils';
-import { useGetData } from '@/utils/providers/requests/helpers';
-import { CmsStaticConfig } from '../api/customCms/db/utils.interface';
+import { UiStaticData } from '../api/customCms/db/utils.interface';
 
-export default memo(function EditProduct() {
-    const products = useGetData<ProductsConfig[]>("api/products", "products");
-    const ui_products = useGetData<CmsStaticConfig>("api/customCms", "dashboard");
+export default memo(function EditProduct({CMS}:UiStaticData) {
+
+    
     return (
         <div>
             {
-                ui_products && products && (<Inventory ui_inventory={ui_products.dashboard.portal.components.inventory} products={products} />)
+                CMS && (<Inventory ui_inventory={CMS.dashboard.portal.components.inventory} />)
             }
         </div>
     )
 })
+
+export const getServerSideProps = async () => {
+    try {
+        const response = await fetch(`${process.env.VERCEL_URL_CORS}/api/customCms`);
+        const CMS = await response.json();
+        return {
+            props: {
+                CMS,
+            },
+        };
+    } catch (error) {
+        console.error('Error in getServerSideProps:', error);
+        return {
+            props: {
+                error: 'An error occurred while fetching server-side data.',
+            },
+        };
+    }
+};
