@@ -71,6 +71,8 @@ export const CMS: CmsStaticConfig = {
                         product: {
                             title: "Products",
                             resume: "Order Resume",
+                            total: "Total order",
+                            tx_total: "Order with Taxes"
                         },
                         addmore: "Add",
                         submit: "Submit",

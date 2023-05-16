@@ -1,0 +1,94 @@
+.general-form__title {
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    margin: calculateRem(35px) 0 calculateRem(25px);
+}
+
+.form__section__title {
+    margin-bottom: calculateRem(16px);
+}
+
+.general-form {
+    width: 100%;
+    max-width: calculateRem(600px);
+    margin: 0 auto;
+}
+
+.general-form__title {
+    font-size: calculateRem(24px);
+    text-align: center;
+    margin-bottom: calculateRem(20px);
+}
+
+.general-form__form {
+    display: flex;
+    flex-direction: column;
+}
+.user-form__field,
+.general-form__field {
+    display: flex;
+    margin-bottom: calculateRem(15px);
+}
+
+.general-form__label {
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: calculateRem(px);
+}
+
+.general-form__input {
+    width: 100%;
+    padding: calculateRem(8px);
+    border: calculateRem(1px) solid #ccc;
+    border-radius: calculateRem(4px);
+    font-size: calculateRem(16px);
+    &.purchase {
+        width: 50%;
+    }
+}
+
+.general-form__button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: calculateRem(10px) calculateRem(15px);
+    border-radius: calculateRem(4px);
+    font-size: calculateRem(16px);
+    cursor: pointer;
+    margin-left: calculateRem(16px);
+}
+
+.general-form__sell-resume {
+    margin-top: calculateRem(20px);
+}
+
+.general-form__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.form__purchase-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: calculateRem(16px);
+}
+.general-form__item {
+    margin-bottom: calculateRem(5px);
+}
+
+.general-form__item-text {
+    font-size: calculateRem(14px);
+}
+
+.general-form__totals {
+    margin-top: calculateRem(20px);
+}
+
+.form__section--submit {
+    margin-top: calculateRem(20px);
+    @include regularButton($w: 220px, $bg: $ps-t-join-color);
+}

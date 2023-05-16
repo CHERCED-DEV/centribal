@@ -130,7 +130,7 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                 data_forms.fields && (
                                     data_forms.fields.map((input) => (
                                         input.value === "reference" ? <div key={input.value} className="user-form__field">
-                                            <select className="user-form__input" {...register("reference")}>
+                                            <select className="general-form__input" {...register("reference")}>
                                                 {reference &&
                                                     reference.map((product) => (
                                                         <option key={product._id} value={product.reference}>
@@ -147,9 +147,9 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                             {
                                 'product' in data_forms && products ? (
                                     <>
-                                        <div className="user-form__field">
-                                            <label className="user-form__label">{data_forms.product?.title}</label>
-                                            <select className="user-form__input" {...register("product")}>
+                                    <label className="general-form__label">{data_forms.product?.title}</label>
+                                        <div className="general-form__field">
+                                            <select className="general-form__input" {...register("product")}>
                                                 {productsByName &&
                                                     productsByName.map((product) => (
                                                         <option key={product._id} value={product._id}>
@@ -157,23 +157,32 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                                         </option>
                                                     ))}
                                             </select>
-                                            <button className="user-form__button" type="button" onClick={() => handleAddToPurchase(watch, products, setPurchase)}>
+                                            <button className="general-form__button" type="button" onClick={() => handleAddToPurchase(watch, products, setPurchase)}>
                                                 {data_forms.addmore}
                                             </button>
                                         </div>
-                                        <div className="user-form__sell-resume">
-                                            <ul className="user-form__list">
+                                        <div className="general-form__sell-resume">
+                                            <ul className="general-form__list">
+                                                {
+                                                    purchase.length >= 1 ? <p className="general-form__sell-resume">{data_forms.product?.resume}:</p> : null
+                                                }
+                                            
                                                 {purchase?.map((item, index) => (
-                                                    <li className="user-form__item" key={`${item.name}${index}`}>
-                                                        <span className="user-form__item-text">{item.name}: {item.price}</span>
-                                                    </li>
+                                                    <li className="general-form__item" key={`${item.name}${index}`}>
+                                                        <span className="general-form__item-text">{item.name}: {item.price}</span>
+                                                    </li>                                                   
                                                 ))}
                                             </ul>
                                             {totalOrder(purchase) > 0 && (
-                                                <div className="user-form__totals">
-                                                    <input className="user-form__input" type="number" readOnly {...register("totalPrice")} value={totalPrice(purchase)} />
-                                                    <input className="user-form__input" type="number" readOnly {...register("totalTaxes")} value={totalTaxes(purchase)} />
-                                                    <input className="user-form__input" type="number" readOnly {...register("orderValue")} value={totalOrder(purchase)} />
+                                                <div className="general-form__totals">
+                                                    <div className='form__purchase-field'>
+                                                    <label className="form__purchase__label">{data_forms.product?.total}</label>
+                                                    <input className="general-form__input purchase" type="number" readOnly {...register("totalPrice")} value={totalPrice(purchase)} />
+                                                    </div>
+                                                    <div className='form__purchase-field'>
+                                                    <label className="form__purchase__label">{data_forms.product?.tx_total}</label>
+                                                    <input className="general-form__input purchase" type="number" readOnly {...register("orderValue")} value={totalOrder(purchase)} />
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>
@@ -190,8 +199,8 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                 <section className="form__section">
                                     <h3 className="form__section__title">{data_forms.form_title}</h3>
                                     <form className="form__section__form" onSubmit={handleSubmit(onSubmit)}>
-                                        <div className="user-form__field">
-                                            <select className="user-form__input" {...register("reference")} defaultValue={product.reference}>
+                                        <div className="general-form__field">
+                                            <select className="general-form__input" {...register("reference")} defaultValue={product.reference}>
                                                 {reference &&
                                                     reference.map((product) => (
                                                         <option key={product._id} value={product.reference}>
@@ -200,16 +209,16 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                                     ))}
                                             </select>
                                         </div>
-                                        <div className="user-form__field">
+                                        <div className="general-form__field">
                                             <input
-                                                className="user-form__input"
+                                                className="general-form__input"
                                                 type="text"
                                                 required={true}
                                                 {...register("name")}
                                                 defaultValue={product.name}
                                             />
                                         </div>
-                                        <div className="user-form__field">
+                                        <div className="general-form__field">
                                             <input
                                                 className="user-form__input"
                                                 type="text"
@@ -218,7 +227,7 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                                 defaultValue={product.description}
                                             />
                                         </div>
-                                        <div className="user-form__field">
+                                        <div className="general-form__field">
                                             <input
                                                 className="user-form__input"
                                                 type="number"
@@ -227,9 +236,9 @@ const GeneralForm: React.FC<GeneralFormsDataProps> = ({ data_forms, method, prod
                                                 defaultValue={product.price}
                                             />
                                         </div>
-                                        <div className="user-form__field">
+                                        <div className="general-form__field">
                                             <input
-                                                className="user-form__input"
+                                                className="general-form__input"
                                                 type="number"
                                                 required={true}
                                                 {...register("taxes")}

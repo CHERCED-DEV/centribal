@@ -29,12 +29,14 @@ export interface GeneralFormsDataProps {
     product?: {
       title?: string;
       resume?: string;
+      total?: string;
+      tx_total?: string;
     };
     addmore?: string;
     submit?: string;
   };
   products?: ProductsConfig[];
-  product?:ProductsConfig
+  product?:ProductsConfig;
   method: string;
 }
 export type FormValues = { [key: string]: unknown };
@@ -46,6 +48,8 @@ export interface CreateOrderConfig {
   product: {
     title: string;
     resume: string;
+    total: string;
+    tx_total: string;
   };
   addmore: string;
   submit: string;
@@ -95,7 +99,7 @@ export const totalTaxes = (purchase: ProductsConfig[]): number => {
 export const totalOrder = (purchase: ProductsConfig[]): number => {
   const priceTotal = totalPrice(purchase);
   const taxesTotal = totalTaxes(purchase);
-  const total = priceTotal + taxesTotal;
+  const total = priceTotal * taxesTotal;
   return total;
 };
 export const randomNumOrder = () => {
